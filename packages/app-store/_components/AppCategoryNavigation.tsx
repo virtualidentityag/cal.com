@@ -32,7 +32,7 @@ const AppCategoryNavigation = ({
 
   return (
     <div className={cs("flex flex-col gap-x-6 md:p-0 xl:flex-row", classNames?.root ?? className)}>
-      <div className="hidden xl:block">
+      <div className="hidden xl:block" style={{ display: "none" }}>
         <VerticalTabs
           tabs={appCategories}
           sticky
@@ -40,7 +40,7 @@ const AppCategoryNavigation = ({
           itemClassname={classNames?.verticalTabsItem}
         />
       </div>
-      <div className="block overflow-x-scroll xl:hidden">
+      <div className="block overflow-x-scroll xl:hidden" style={{ display: "none" }}>
         <HorizontalTabs tabs={appCategories} linkProps={{ shallow: true }} />
       </div>
       <main className={classNames?.container ?? containerClassname} ref={animationRef}>

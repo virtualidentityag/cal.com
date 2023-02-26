@@ -265,20 +265,22 @@ export function CalendarListContainer(props: { heading?: boolean; fromOnboarding
               <>
                 {heading && (
                   <div className="flex flex-col gap-6 rounded-md border border-gray-200 p-7">
-                    <ShellSubHeading
-                      title={t("calendar")}
-                      subtitle={t("installed_app_calendar_description")}
-                      className="mb-0 flex flex-wrap items-center gap-4 sm:flex-nowrap md:mb-3 md:gap-0"
-                      actions={
-                        <div className="flex flex-col xl:flex-row xl:space-x-5">
-                          {!!data.connectedCalendars.length && (
-                            <div className="flex items-center">
-                              <AdditionalCalendarSelector isLoading={mutation.isLoading} />
-                            </div>
-                          )}
-                        </div>
-                      }
-                    />
+                    <div style={{ display: "none" }}>
+                      <ShellSubHeading
+                        title={t("calendar")}
+                        subtitle={t("installed_app_calendar_description")}
+                        className="mb-0 flex flex-wrap items-center gap-4 sm:flex-nowrap md:mb-3 md:gap-0"
+                        actions={
+                          <div className="flex flex-col xl:flex-row xl:space-x-5">
+                            {!!data.connectedCalendars.length && (
+                              <div className="flex items-center">
+                                <AdditionalCalendarSelector isLoading={mutation.isLoading} />
+                              </div>
+                            )}
+                          </div>
+                        }
+                      />
+                    </div>
                     <div className="flex justify-between rounded-md border border-gray-200 bg-gray-50 p-4">
                       <div className="flex w-full flex-col items-start gap-4 md:flex-row md:items-center">
                         <div className="relative rounded-md border border-gray-200 bg-white p-1.5">

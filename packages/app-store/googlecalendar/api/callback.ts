@@ -74,8 +74,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       );
     }
   }
-  res.redirect(
-    getSafeRedirectUrl(state?.returnTo) ??
-      getInstalledAppPath({ variant: "calendar", slug: "google-calendar" })
-  );
+  res.redirect(process.env.CALENDAR_INTEGRATION_CALLBACK_URL ?? "");
 }

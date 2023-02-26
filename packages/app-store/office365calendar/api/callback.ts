@@ -1,12 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { WEBAPP_URL } from "@calcom/lib/constants";
-import { getSafeRedirectUrl } from "@calcom/lib/getSafeRedirectUrl";
 import prisma from "@calcom/prisma";
 
 import { decodeOAuthState } from "../../_utils/decodeOAuthState";
 import getAppKeysFromSlug from "../../_utils/getAppKeysFromSlug";
-import getInstalledAppPath from "../../_utils/getInstalledAppPath";
 
 const scopes = ["offline_access", "Calendars.Read", "Calendars.ReadWrite"];
 
@@ -75,8 +73,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   });
 
   const state = decodeOAuthState(req);
-  return res.redirect(
-    getSafeRedirectUrl(state?.returnTo) ??
-      getInstalledAppPath({ variant: "calendar", slug: "office365-calendar" })
-  );
+  return res.redirect(process.env.CALENDAR_INTEGRATION_CALLBACK_URL ?? "");
 }

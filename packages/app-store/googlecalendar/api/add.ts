@@ -36,6 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       state: encodeOAuthState(req),
     });
 
-    res.status(200).json({ url: authUrl });
+    const url = process.env.CALENDAR_INTEGRATION_CALLBACK_URL;
+    res.status(200).json({ url: url });
   }
 }
