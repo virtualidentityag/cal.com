@@ -29,7 +29,7 @@ export function ManageLink(props: { calEvent: CalendarEvent; attendee: Person })
           <>{t("need_to_make_a_change")}</>
 
           {!props.calEvent.recurringEvent && (
-            <span>
+            <span style={{ display: "none" }}>
               <a
                 href={getRescheduleLink(props.calEvent)}
                 style={{

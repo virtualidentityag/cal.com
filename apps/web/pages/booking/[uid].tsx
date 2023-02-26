@@ -370,7 +370,7 @@ export default function Success(props: SuccessProps) {
         />
       )}
       {userIsOwner && !isEmbed && (
-        <div className="mt-2 ml-4 -mb-4">
+        <div className="mt-2 ml-4 -mb-4" style={{ display: "none" }}>
           <Link
             href={allRemainingBookings ? "/bookings/recurring" : "/bookings/upcoming"}
             className="mt-2 inline-flex px-1 py-2 text-sm text-gray-500 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-transparent dark:hover:text-white">
@@ -498,7 +498,7 @@ export default function Success(props: SuccessProps) {
                         <div className="col-span-2 last:mb-0">
                           <>
                             {bookingInfo?.user && (
-                              <div className="mb-3">
+                              <div className="mb-3" style={{ display: "none" }}>
                                 <p>{bookingInfo.user.name}</p>
                                 <p className="text-bookinglight">{bookingInfo.user.email}</p>
                               </div>
@@ -506,7 +506,9 @@ export default function Success(props: SuccessProps) {
                             {bookingInfo?.attendees.map((attendee) => (
                               <div key={attendee.name} className="mb-3 last:mb-0">
                                 {attendee.name && <p>{attendee.name}</p>}
-                                <p className="text-bookinglight">{attendee.email}</p>
+                                <p className="text-bookinglight" style={{ display: "none" }}>
+                                  {attendee.email}
+                                </p>
                               </div>
                             ))}
                           </>
@@ -603,7 +605,7 @@ export default function Success(props: SuccessProps) {
                 {(!needsConfirmation || !userIsOwner) &&
                   !isCancelled &&
                   (!isCancellationMode ? (
-                    <>
+                    <div style={{ display: "none" }}>
                       <hr className="border-bookinglightest dark:border-darkgray-300 mb-8" />
                       <div className="text-center last:pb-0">
                         <span className="text-gray-900 ltr:mr-2 rtl:ml-2 dark:text-gray-50">
@@ -631,7 +633,7 @@ export default function Success(props: SuccessProps) {
                           {t("cancel")}
                         </button>
                       </div>
-                    </>
+                    </div>
                   ) : (
                     <>
                       <hr className="border-bookinglightest dark:border-darkgray-200" />

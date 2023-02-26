@@ -649,7 +649,7 @@ const BookingPage = ({
             )}
             <div className={classNames("p-6", showEventTypeDetails ? "sm:w-1/2" : "w-full")}>
               <Form form={bookingForm} handleSubmit={bookEvent}>
-                <div className="mb-4">
+                <div className="mb-4" style={{ display: "none" }}>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-white">
                     {t("your_name")}
                   </label>
@@ -666,7 +666,7 @@ const BookingPage = ({
                     />
                   </div>
                 </div>
-                <div className="mb-4">
+                <div className="mb-4" style={{ display: "none" }}>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-white">
                     {t("email_address")}
                   </label>

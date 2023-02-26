@@ -33,6 +33,7 @@ function TeamPage({ team }: TeamPageProps) {
   const isEmbed = useIsEmbed();
   const telemetry = useTelemetry();
   const router = useRouter();
+  const query = { ...router.query };
 
   useEffect(() => {
     telemetry.event(
@@ -51,7 +52,10 @@ function TeamPage({ team }: TeamPageProps) {
             !isEmbed && "bg-white"
           )}>
           <Link
-            href={`/team/${team.slug}/${type.slug}`}
+            href={{
+              pathname: `${team.slug}/${type.slug}`,
+              query,
+            }}
             className="flex justify-between px-6 py-4"
             data-testid="event-type-link">
             <div className="flex-shrink">
