@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 
 import { availabilityAsString } from "@calcom/lib/availability";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
@@ -42,7 +42,7 @@ export function ScheduleListItem({
             href={"/availability/" + schedule.id}
             className="flex-grow truncate text-sm"
             title={schedule.name}>
-            <div className="space-x-2 rtl:space-x-reverse">
+            <div className="space-x-2 rtl:space-x-reverse" style={{ display: "none" }}>
               <span className="truncate font-medium text-gray-900">{schedule.name}</span>
               {schedule.isDefault && (
                 <Badge variant="success" className="text-xs">
@@ -63,7 +63,7 @@ export function ScheduleListItem({
                   </Fragment>
                 ))}
               {(schedule.timeZone || displayOptions?.timeZone) && (
-                <p className="my-1 flex items-center first-letter:text-xs">
+                <p className="my-1 flex items-center first-letter:text-xs" style={{ display: "none" }}>
                   <FiGlobe />
                   &nbsp;{schedule.timeZone ?? displayOptions?.timeZone}
                 </p>
@@ -74,6 +74,7 @@ export function ScheduleListItem({
         <Dropdown>
           <DropdownMenuTrigger asChild>
             <Button
+              style={{ display: "none" }}
               className="mx-5"
               type="button"
               variant="icon"

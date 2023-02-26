@@ -636,7 +636,7 @@ function MobileNavigationContainer() {
 }
 
 const MobileNavigation = () => {
-  const isEmbed = useIsEmbed();
+  const isEmbed = true;
 
   return (
     <>
@@ -724,7 +724,9 @@ function SideBarContainer() {
 function SideBar() {
   return (
     <div className="relative">
-      <aside className="desktop-transparent top-0 hidden h-full max-h-screen w-14 flex-col overflow-y-auto overflow-x-hidden border-r border-gray-100 bg-gray-50 md:sticky md:flex lg:w-56 lg:px-4">
+      <aside
+        style={{ display: "none" }}
+        className="desktop-transparent top-0 hidden h-full max-h-screen w-14 flex-col overflow-y-auto overflow-x-hidden border-r border-gray-100 bg-gray-50 md:sticky md:flex lg:w-56 lg:px-4">
         <div className="flex h-full flex-col justify-between py-3 lg:pt-6 ">
           <header className="items-center justify-between md:hidden lg:flex">
             <Link href="/event-types" className="px-2">

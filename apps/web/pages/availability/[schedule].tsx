@@ -1,4 +1,5 @@
 import type { GetServerSidePropsContext } from "next";
+import React from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -22,7 +23,6 @@ import {
   Switch,
   TimezoneSelect,
   Tooltip,
-  VerticalDivider,
 } from "@calcom/ui";
 import { FiInfo, FiPlus } from "@calcom/ui/components/icon";
 
@@ -149,7 +149,7 @@ export default function Availability({ schedule }: { schedule: number }) {
       }
       CTA={
         <div className="flex items-center justify-end">
-          <div className="flex items-center rounded-md px-2 sm:hover:bg-gray-100">
+          <div className="flex items-center rounded-md px-2 sm:hover:bg-gray-100" style={{ display: "none" }}>
             <Skeleton
               as={Label}
               htmlFor="hiddenSwitch"
@@ -165,8 +165,6 @@ export default function Availability({ schedule }: { schedule: number }) {
               }}
             />
           </div>
-
-          <VerticalDivider />
 
           <div className="border-l-2 border-gray-300" />
           <Button className="ml-4 lg:ml-0" type="submit" form="availability-form">
@@ -206,7 +204,7 @@ export default function Availability({ schedule }: { schedule: number }) {
               {data?.workingHours && <DateOverride workingHours={data.workingHours} />}
             </div>
           </div>
-          <div className="min-w-40 col-span-3 space-y-2 lg:col-span-1">
+          <div className="min-w-40 col-span-3 space-y-2 lg:col-span-1" style={{ display: "none" }}>
             <div className="xl:max-w-80 w-full pr-4 sm:ml-0 sm:mr-36 sm:p-0">
               <div>
                 <label htmlFor="timeZone" className="block text-sm font-medium text-gray-700">
