@@ -124,6 +124,7 @@ export default function Availability({ schedule }: { schedule: number }) {
     <Shell
       backPath="/availability"
       title={data?.schedule.name ? data.schedule.name + " | " + t("availability") : t("availability")}
+      TopNavContainer={<></>}
       heading={
         <div style={{ display: "none" }}>
           <Controller
@@ -189,7 +190,7 @@ export default function Availability({ schedule }: { schedule: number }) {
           }}
           className="flex flex-col sm:mx-0 xl:flex-row xl:space-x-6">
           <div className="flex-1 flex-row xl:mr-0">
-            <div className="mb-6 rounded-md border">
+            <div className="mb-6 rounded-md ">
               <div>
                 {typeof me.data?.weekStart === "string" && (
                   <Schedule
