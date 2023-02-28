@@ -658,7 +658,11 @@ const EventTypesPage = () => {
 
   return (
     <div>
-      <Shell heading={t("event_types_page_title")} subtitle={t("event_types_page_subtitle")} CTA={<CTA />}>
+      <Shell
+        heading={t("event_types_page_title")}
+        subtitle={t("event_types_page_subtitle")}
+        CTA={<CTA />}
+        TopNavContainer={<></>}>
         <WithQuery
           customLoader={<SkeletonLoader />}
           success={({ data }) => (
