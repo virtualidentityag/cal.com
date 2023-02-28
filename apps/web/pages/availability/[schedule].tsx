@@ -125,27 +125,31 @@ export default function Availability({ schedule }: { schedule: number }) {
       backPath="/availability"
       title={data?.schedule.name ? data.schedule.name + " | " + t("availability") : t("availability")}
       heading={
-        <Controller
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <EditableHeading isReady={!isLoading} {...field} data-testid="availablity-title" />
-          )}
-        />
+        <div style={{ display: "none" }}>
+          <Controller
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <EditableHeading isReady={!isLoading} {...field} data-testid="availablity-title" />
+            )}
+          />
+        </div>
       }
       subtitle={
-        data ? (
-          data.schedule.availability
-            .filter((availability) => !!availability.days.length)
-            .map((availability) => (
-              <span key={availability.id}>
-                {availabilityAsString(availability, { locale: i18n.language, hour12: timeFormat === 12 })}
-                <br />
-              </span>
-            ))
-        ) : (
-          <SkeletonText className="h-4 w-48" />
-        )
+        <div style={{ display: "none" }}>
+          {data ? (
+            data.schedule.availability
+              .filter((availability) => !!availability.days.length)
+              .map((availability) => (
+                <span key={availability.id}>
+                  {availabilityAsString(availability, { locale: i18n.language, hour12: timeFormat === 12 })}
+                  <br />
+                </span>
+              ))
+          ) : (
+            <SkeletonText className="h-4 w-48" />
+          )}
+        </div>
       }
       CTA={
         <div className="flex items-center justify-end">

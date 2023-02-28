@@ -262,7 +262,7 @@ export function CalendarListContainer(props: { heading?: boolean; fromOnboarding
         return (
           <>
             {!!data.connectedCalendars.length || !!installedCalendars.data?.items.length ? (
-              <>
+              <div className="bg-white">
                 {heading && (
                   <div className="flex flex-col gap-6 rounded-md border border-gray-200 p-7">
                     <div style={{ display: "none" }}>
@@ -281,7 +281,7 @@ export function CalendarListContainer(props: { heading?: boolean; fromOnboarding
                         }
                       />
                     </div>
-                    <div className="flex justify-between rounded-md border border-gray-200 bg-gray-50 p-4">
+                    <div className="flex justify-between rounded-md border border-gray-200 bg-white p-4">
                       <div className="flex w-full flex-col items-start gap-4 md:flex-row md:items-center">
                         <div className="relative rounded-md border border-gray-200 bg-white p-1.5">
                           <FiCalendar className="h-8 w-8" strokeWidth="1" />
@@ -311,7 +311,7 @@ export function CalendarListContainer(props: { heading?: boolean; fromOnboarding
                     />
                   </div>
                 )}
-              </>
+              </div>
             ) : fromOnboarding ? (
               <>
                 {!!query.data?.connectedCalendars.length && (

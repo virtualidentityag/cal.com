@@ -106,10 +106,9 @@ export function AvailabilityList({ schedules }: RouterOutputs["viewer"]["availab
 const WithQuery = withQuery(trpc.viewer.availability.list);
 
 export default function AvailabilityPage() {
-  const { t } = useLocale();
   return (
     <div>
-      <Shell>
+      <Shell TopNavContainer={<></>}>
         <WithQuery success={({ data }) => <AvailabilityList {...data} />} customLoader={<SkeletonLoader />} />
       </Shell>
     </div>
