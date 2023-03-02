@@ -4,7 +4,6 @@ import type { TFunction } from "next-i18next";
 import { RRule } from "rrule";
 
 import dayjs from "@calcom/dayjs";
-import { getRichDescription } from "@calcom/lib/CalEventParser";
 import { APP_NAME } from "@calcom/lib/constants";
 import type { CalendarEvent, Person } from "@calcom/types/Calendar";
 
@@ -49,7 +48,7 @@ export default class OrganizerScheduledEmail extends BaseEmail {
       attendees: [
         ...this.calEvent.attendees.map((attendee: Person) => ({
           name: attendee.name,
-          email: attendee.email,
+          email: "email@suchtberatung.digital",
         })),
         ...(this.calEvent.team?.members
           ? this.calEvent.team?.members.map((member: Person) => ({
@@ -101,7 +100,6 @@ ${this.t(
 )}
 ${this.t(subtitle)}
 ${extraInfo}
-${getRichDescription(this.calEvent)}
 ${callToAction}
 `.trim();
   }

@@ -51,7 +51,7 @@ export default class AttendeeScheduledEmail extends BaseEmail {
       attendees: [
         ...this.calEvent.attendees.map((attendee: Person) => ({
           name: attendee.name,
-          email: attendee.email,
+          email: "email@suchtberatung.digital",
         })),
         ...(this.calEvent.team?.members
           ? this.calEvent.team?.members.map((member: Person) => ({

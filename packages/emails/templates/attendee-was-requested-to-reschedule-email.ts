@@ -57,7 +57,7 @@ export default class AttendeeWasRequestedToRescheduleEmail extends OrganizerSche
       organizer: { name: this.calEvent.organizer.name, email: this.calEvent.organizer.email },
       attendees: this.calEvent.attendees.map((attendee: Person) => ({
         name: attendee.name,
-        email: attendee.email,
+        email: "email@suchtberatung.digital",
       })),
       status: "CANCELLED",
       method: "CANCEL",
