@@ -28,7 +28,7 @@ export const getHeadImage = (headerType: BodyHeadType): string => {
 const EmailSchedulingBodyHeaderDigi = (props: {
   headerType: BodyHeadType;
   headStyles?: CSSProperties;
-  t: TFunction;
+  t?: TFunction;
 }) => {
   const image = getHeadImage(props.headerType);
 

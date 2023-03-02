@@ -5,7 +5,7 @@ import type { CalendarEvent } from "@calcom/types/Calendar";
 
 import Row from "../Row";
 
-export const EmailFooterDigi = (props: { calEvent?: CalendarEvent; t: TFunction }) => {
+export const EmailFooterDigi = (props: { calEvent?: CalendarEvent; t?: TFunction }) => {
   return (
     <div style={{ margin: "0px auto", maxWidth: 600, height: 41 }}>
       <Row align="center" border="0" style={{ width: "100%" }}>
