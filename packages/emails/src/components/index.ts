@@ -12,3 +12,5 @@ export { WhenInfo } from "./WhenInfo";
 export { WhoInfo } from "./WhoInfo";
 export { AppsStatus } from "./AppsStatus";
 export { Separator } from "./Separator";
+export { Paragraph } from "./DigiOverrides/Paragraph";
+export { EmailFooterDigi } from "./DigiOverrides/EmailFooterDigi";

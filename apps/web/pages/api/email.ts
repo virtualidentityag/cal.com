@@ -63,6 +63,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     renderEmail("OrganizerScheduledEmail", {
       calEvent: evt,
       attendee: evt.organizer,
+      // user: { name: "Test" },
+      // language: t,
     })
   );
   res.end();

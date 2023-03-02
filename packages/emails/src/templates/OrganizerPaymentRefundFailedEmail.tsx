@@ -1,5 +1,5 @@
 import { BaseEmailHtml } from "../components";
-import { OrganizerScheduledEmail } from "./OrganizerScheduledEmail";
+import type { OrganizerScheduledEmail } from "./OrganizerScheduledEmail";
 
 export const OrganizerPaymentRefundFailedEmail = (
   props: React.ComponentProps<typeof OrganizerScheduledEmail>
@@ -12,6 +12,7 @@ export const OrganizerPaymentRefundFailedEmail = (
       subject="refund_failed_subject"
       title={t("a_refund_failed")}
       callToAction={null}
+      t={t}
       subtitle={
         <>
           {t("check_with_provider_and_user", {

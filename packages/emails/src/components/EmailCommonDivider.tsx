@@ -35,8 +35,6 @@ const EmailCommonDivider = ({
           }}>
           <td
             style={{
-              borderLeft: "1px solid #E1E1E1",
-              borderRight: "1px solid #E1E1E1",
               direction: "ltr",
               fontSize: 0,
               padding: "15px 0px 0 0px",

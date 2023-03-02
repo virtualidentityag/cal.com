@@ -1,10 +1,13 @@
 /* eslint-disable @next/next/no-head-element */
+import type { TFunction } from "next-i18next";
+
 import BaseTable from "./BaseTable";
+import EmailSchedulingBodyHeaderDigi from "./DigiOverrides/EmailSchedulingBodyHeaderDigi";
 import EmailBodyLogo from "./EmailBodyLogo";
 import EmailHead from "./EmailHead";
 import EmailScheduledBodyHeaderContent from "./EmailScheduledBodyHeaderContent";
 import EmailSchedulingBodyDivider from "./EmailSchedulingBodyDivider";
-import EmailSchedulingBodyHeader, { BodyHeadType } from "./EmailSchedulingBodyHeader";
+import type { BodyHeadType } from "./EmailSchedulingBodyHeader";
 import RawHtml from "./RawHtml";
 import Row from "./Row";
 
@@ -22,6 +25,7 @@ export const V2BaseEmailHtml = (props: {
   title?: string;
   subtitle?: React.ReactNode;
   headerType?: BodyHeadType;
+  t?: TFunction;
 }) => {
   return (
     <Html>
@@ -47,7 +51,7 @@ export const V2BaseEmailHtml = (props: {
               </td>
             </Row>
           </div>
-          {props.headerType && <EmailSchedulingBodyHeader headerType={props.headerType} />}
+          {props.headerType && <EmailSchedulingBodyHeaderDigi headerType={props.headerType} t={props.t} />}
           {props.title && <EmailScheduledBodyHeaderContent title={props.title} subtitle={props.subtitle} />}
           {(props.headerType || props.title || props.subtitle) && <EmailSchedulingBodyDivider />}
 
@@ -101,7 +105,7 @@ export const V2BaseEmailHtml = (props: {
                       }}>
                       <div
                         style={{
-                          fontFamily: "Roboto, Helvetica, sans-serif",
+                          fontFamily: "Nunito, sans-serif",
                           fontSize: 16,
                           fontWeight: 500,
                           lineHeight: 1,
@@ -165,7 +169,7 @@ export const V2BaseEmailHtml = (props: {
                             style={{ fontSize: 0, padding: "10px 25px", wordBreak: "break-word" }}>
                             <div
                               style={{
-                                fontFamily: "Roboto, Helvetica, sans-serif",
+                                fontFamily: "Nunito, sans-serif",
                                 fontSize: 13,
                                 lineHeight: 1,
                                 textAlign: "left",

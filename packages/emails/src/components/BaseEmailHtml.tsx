@@ -1,10 +1,15 @@
 /* eslint-disable @next/next/no-head-element */
+import type { TFunction } from "next-i18next";
+
+import type { CalendarEvent } from "@calcom/types/Calendar";
+
 import BaseTable from "./BaseTable";
-import EmailBodyLogo from "./EmailBodyLogo";
+import { EmailFooterDigi } from "./DigiOverrides/EmailFooterDigi";
+import EmailSchedulingBodyHeaderDigi from "./DigiOverrides/EmailSchedulingBodyHeaderDigi";
 import EmailHead from "./EmailHead";
 import EmailScheduledBodyHeaderContent from "./EmailScheduledBodyHeaderContent";
 import EmailSchedulingBodyDivider from "./EmailSchedulingBodyDivider";
-import EmailSchedulingBodyHeader, { BodyHeadType } from "./EmailSchedulingBodyHeader";
+import type { BodyHeadType } from "./EmailSchedulingBodyHeader";
 import RawHtml from "./RawHtml";
 import Row from "./Row";
 
@@ -22,7 +27,10 @@ export const BaseEmailHtml = (props: {
   title?: string;
   subtitle?: React.ReactNode;
   headerType?: BodyHeadType;
+  calEvent?: CalendarEvent;
+  t: TFunction;
 }) => {
+  console.log(props.t);
   return (
     <Html>
       <EmailHead title={props.subject} />
@@ -51,13 +59,17 @@ export const BaseEmailHtml = (props: {
             style={{
               margin: "0px auto",
               maxWidth: 600,
-              borderRadius: "8px",
+              borderRadius: "0px",
               border: "1px solid #E5E7EB",
-              padding: "2px",
+              padding: "0px",
               backgroundColor: "#FFFFFF",
             }}>
             {props.headerType && (
-              <EmailSchedulingBodyHeader headerType={props.headerType} headStyles={{ border: 0 }} />
+              <EmailSchedulingBodyHeaderDigi
+                headerType={props.headerType}
+                headStyles={{ border: 0 }}
+                t={props.t}
+              />
             )}
             {props.title && (
               <EmailScheduledBodyHeaderContent
@@ -108,9 +120,9 @@ export const BaseEmailHtml = (props: {
                       <td align="left" style={{ fontSize: 0, padding: "10px 25px", wordBreak: "break-word" }}>
                         <div
                           style={{
-                            fontFamily: "Roboto, Helvetica, sans-serif",
+                            fontFamily: "Nunito, sans-serif",
                             fontSize: 16,
-                            fontWeight: 500,
+                            fontWeight: 700,
                             lineHeight: 1,
                             textAlign: "left",
                             color: "#101010",
@@ -177,7 +189,7 @@ export const BaseEmailHtml = (props: {
                               style={{ fontSize: 0, padding: "10px 25px", wordBreak: "break-word" }}>
                               <div
                                 style={{
-                                  fontFamily: "Roboto, Helvetica, sans-serif",
+                                  fontFamily: "Nunito, sans-serif",
                                   fontSize: 13,
                                   lineHeight: 1,
                                   textAlign: "left",
@@ -195,7 +207,7 @@ export const BaseEmailHtml = (props: {
               </Row>
             </div>
           </div>
-          <EmailBodyLogo />
+          <EmailFooterDigi calEvent={props.calEvent} t={props.t} />
           <RawHtml html="<!--[if mso | IE]></td></tr></table><![endif]-->" />
         </div>
       </body>

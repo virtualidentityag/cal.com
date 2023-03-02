@@ -7,7 +7,7 @@ export const CallToAction = (props: { label: string; href: string; secondary?: b
       background: props.secondary ? "#FFFFFF" : "#292929",
       border: props.secondary ? "1px solid #d1d5db" : "",
       color: "#ffffff",
-      fontFamily: "Roboto, Helvetica, sans-serif",
+      fontFamily: "Nunito, sans-serif",
       fontSize: "14px",
       fontWeight: 500,
       lineHeight: "20px",

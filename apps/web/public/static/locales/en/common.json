@@ -1625,5 +1625,9 @@
   "no_responses_yet": "No responses yet",
   "this_will_be_the_placeholder": "This will be the placeholder",
   "verification_code": "Verification code",
-  "verify": "Verify"
+  "verify": "Verify",
+  "imprint": "Imprint",
+  "privacy" : "Data protection",
+  "tenant_name": "DigiSucht",
+  "tenant_claim": "suchberatung.digital"
 }

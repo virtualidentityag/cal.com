@@ -1,7 +1,7 @@
 import type { TFunction } from "next-i18next";
 
 import dayjs from "@calcom/dayjs";
-import type { AppsStatus as AppsStatusType, CalendarEvent, Person } from "@calcom/types/Calendar";
+import type { CalendarEvent, Person } from "@calcom/types/Calendar";
 
 import {
   BaseEmailHtml,
@@ -13,6 +13,8 @@ import {
   WhoInfo,
   AppsStatus,
 } from "../components";
+
+const Spacer = () => <p style={{ height: 12 }} />;
 
 export const BaseScheduledEmail = (
   props: {
@@ -43,6 +45,7 @@ export const BaseScheduledEmail = (
 
   return (
     <BaseEmailHtml
+      t={t}
       headerType={props.headerType || "checkCircle"}
       subject={props.subject || subject}
       title={t(
@@ -74,6 +77,7 @@ export const BaseScheduledEmail = (
       <Info label={t("additional_notes")} description={props.calEvent.additionalNotes} withSpacer />
       {props.includeAppsStatus && <AppsStatus calEvent={props.calEvent} t={t} />}
       <CustomInputs calEvent={props.calEvent} />
+      <Spacer />
     </BaseEmailHtml>
   );
 };

@@ -18,6 +18,7 @@ export const TeamInviteEmail = (
 ) => {
   return (
     <V2BaseEmailHtml
+      t={props.language}
       subject={props.language("user_invited_you", {
         user: props.from,
         team: props.teamName,

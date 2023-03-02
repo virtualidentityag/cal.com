@@ -1,4 +1,4 @@
-import { TFunction } from "next-i18next";
+import type { TFunction } from "next-i18next";
 
 import { CAL_URL } from "@calcom/lib/constants";
 
@@ -16,7 +16,7 @@ export const DisabledAppEmail = (
   const { title, appName, eventTypeId, t, appType } = props;
 
   return (
-    <BaseEmailHtml subject={t("app_disabled", { appName: appName })}>
+    <BaseEmailHtml subject={t("app_disabled", { appName: appName })} t={t}>
       {appType.some((type) => type === "payment") ? (
         <>
           <p>

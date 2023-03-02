@@ -1,9 +1,10 @@
+import type { TFunction } from "next-i18next";
 import type { CSSProperties } from "react";
 
 import { WEBAPP_URL, IS_PRODUCTION } from "@calcom/lib/constants";
 
-import EmailCommonDivider from "./EmailCommonDivider";
-import Row from "./Row";
+import EmailCommonDivider from "../EmailCommonDivider";
+import Row from "../Row";
 
 export type BodyHeadType = "checkCircle" | "xCircle" | "calendarCircle";
 
@@ -24,13 +25,33 @@ export const getHeadImage = (headerType: BodyHeadType): string => {
   }
 };
 
-const EmailSchedulingBodyHeader = (props: { headerType: BodyHeadType; headStyles?: CSSProperties }) => {
+const EmailSchedulingBodyHeaderDigi = (props: {
+  headerType: BodyHeadType;
+  headStyles?: CSSProperties;
+  t: TFunction;
+}) => {
   const image = getHeadImage(props.headerType);
 
   return (
     <>
-      <EmailCommonDivider
-        headStyles={{ padding: "30px 30px 0 30px", borderTop: "1px solid #E1E1E1", ...props.headStyles }}>
+      <EmailCommonDivider headStyles={{ padding: "0", borderTop: "1px solid #E1E1E1" }}>
+        <td
+          align="left"
+          style={{
+            fontSize: "18px",
+            padding: "45px 25px",
+            wordBreak: "break-word",
+            height: "100px",
+            backgroundColor: "#225e65",
+            color: "white",
+            lineHeight: "5px",
+            fontFamily: "'Nunito', sans-serif",
+          }}>
+          <h2>{props.t?.("tenant_name") as string}</h2>
+          <small>{props.t?.("tenant_claim") as string}</small>
+        </td>
+      </EmailCommonDivider>
+      <EmailCommonDivider headStyles={{ paddingTop: "10px" }}>
         <td
           align="center"
           style={{
@@ -63,4 +84,4 @@ const EmailSchedulingBodyHeader = (props: { headerType: BodyHeadType; headStyles
   );
 };
 
-export default EmailSchedulingBodyHeader;
+export default EmailSchedulingBodyHeaderDigi;

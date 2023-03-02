@@ -12,7 +12,7 @@ export function ManageLink(props: { calEvent: CalendarEvent; attendee: Person })
     return (
       <div
         style={{
-          fontFamily: "Roboto, Helvetica, sans-serif",
+          fontFamily: "Nunito, sans-serif",
           fontSize: "16px",
           fontWeight: 500,
           lineHeight: "0px",

@@ -16,7 +16,9 @@ export const ForgotPasswordEmail = (
   props: PasswordReset & Partial<React.ComponentProps<typeof BaseEmailHtml>>
 ) => {
   return (
-    <BaseEmailHtml subject={props.language("reset_password_subject", { appName: APP_NAME })}>
+    <BaseEmailHtml
+      subject={props.language("reset_password_subject", { appName: APP_NAME })}
+      t={props.language}>
       <p>
         <>{props.language("hi_user_name", { name: props.user.name })}!</>
       </p>
