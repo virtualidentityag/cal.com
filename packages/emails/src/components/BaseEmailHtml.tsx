@@ -28,7 +28,7 @@ export const BaseEmailHtml = (props: {
   subtitle?: React.ReactNode;
   headerType?: BodyHeadType;
   calEvent?: CalendarEvent;
-  t: TFunction;
+  t?: TFunction;
 }) => {
   console.log(props.t);
   return (
