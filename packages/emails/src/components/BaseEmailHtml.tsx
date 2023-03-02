@@ -30,7 +30,6 @@ export const BaseEmailHtml = (props: {
   calEvent?: CalendarEvent;
   t?: TFunction;
 }) => {
-  console.log(props.t);
   return (
     <Html>
       <EmailHead title={props.subject} />
