@@ -11,7 +11,6 @@ import {
   ManageLink,
   WhenInfo,
   WhoInfo,
-  AppsStatus,
 } from "../components";
 
 const Spacer = () => <p style={{ height: 12 }} />;
@@ -75,7 +74,7 @@ export const BaseScheduledEmail = (
       <LocationInfo calEvent={props.calEvent} t={t} />
       <Info label={t("description")} description={props.calEvent.description} withSpacer />
       <Info label={t("additional_notes")} description={props.calEvent.additionalNotes} withSpacer />
-      {props.includeAppsStatus && <AppsStatus calEvent={props.calEvent} t={t} />}
+      {/* {props.includeAppsStatus && <AppsStatus calEvent={props.calEvent} t={t} />} */}
       <CustomInputs calEvent={props.calEvent} />
       <Spacer />
     </BaseEmailHtml>
