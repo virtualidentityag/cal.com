@@ -478,7 +478,7 @@
   "booking_reschedule_confirmation": "Planen Sie Ihr {{eventTypeTitle}} mit {{profileName}} um",
   "in_person_meeting": "Vor-Ort-Termin",
   "attendeeInPerson": "Persönlich (Teilnehmeradresse)",
-  "inPerson": "Persönlich (Organisator-Adresse)",
+  "inPerson": "Vor-Ort-Beratung",
   "link_meeting": "Termin verknüpfen",
   "phone_call": "Telefonat",
   "your_number": "Ihre Telefonnummer",

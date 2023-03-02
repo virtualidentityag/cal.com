@@ -91,7 +91,7 @@ export const defaultLocations: DefaultEventLocationType[] = [
   {
     default: true,
     type: DefaultEventLocationTypeEnum.Link,
-    label: "Link",
+    label: "Chat",
     organizerInputType: "text",
     variable: "locationLink",
     messageForOrganizer: "Provide a Meeting Link",
@@ -117,7 +117,7 @@ export const defaultLocations: DefaultEventLocationType[] = [
   {
     default: true,
     type: DefaultEventLocationTypeEnum.UserPhone,
-    label: "Organizer Phone Number",
+    label: "Telefon-Beratung",
     messageForOrganizer: "Provide your phone number",
     organizerInputType: "phone",
     variable: "locationPhoneNumber",
