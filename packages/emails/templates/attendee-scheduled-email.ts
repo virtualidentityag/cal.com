@@ -47,7 +47,7 @@ export default class AttendeeScheduledEmail extends BaseEmail {
       title: this.calEvent.title,
       description: this.getTextBody(),
       duration: { minutes: dayjs(this.calEvent.endTime).diff(dayjs(this.calEvent.startTime), "minute") },
-      organizer: { name: this.calEvent.organizer.name, email: this.calEvent.organizer.email },
+      organizer: { name: this.calEvent.organizer.name },
       attendees: [
         ...this.calEvent.attendees.map((attendee: Person) => ({
           name: attendee.name,

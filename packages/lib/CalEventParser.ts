@@ -36,21 +36,18 @@ export const getWho = (calEvent: CalendarEvent) => {
     .map((attendee) => {
       return `
 ${attendee?.name || calEvent.organizer.language.translate("guest")}
-${attendee.email}
       `;
     })
     .join("");
 
   const organizer = `
 ${calEvent.organizer.name} - ${calEvent.organizer.language.translate("organizer")}
-${calEvent.organizer.email}
   `;
 
   const teamMembers = calEvent.team?.members
     ? calEvent.team.members.map((member) => {
         return `
-${member.name} - ${calEvent.organizer.language.translate("team_member")} 
-${member.email}
+${member.name} - ${calEvent.organizer.language.translate("team_member")}
     `;
       })
     : [];
