@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       state,
     };
     const query = stringify(params);
-    const url = process.env.CALENDAR_INTEGRATION_CALLBACK_URL;
+    const url = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?${query}`;
     res.status(200).json({ url });
   }
 }

@@ -3,7 +3,7 @@ import type { AppMeta } from "@calcom/types/App";
 import _package from "./package.json";
 
 export const metadata = {
-  name: "Cal Video",
+  name: "Videoberatung",
   description: _package.description,
   installed: !!process.env.DAILY_API_KEY,
   type: "daily_video",
@@ -19,14 +19,14 @@ export const metadata = {
   reviews: 69, // TODO: placeholder for now, pull this from TrustPilot or G2
   category: "video",
   slug: "daily-video",
-  title: "Cal Video",
+  title: "Videoberatung",
   isGlobal: true,
   email: "help@cal.com",
   appData: {
     location: {
       linkType: "dynamic",
       type: "integrations:daily",
-      label: "Cal Video",
+      label: "Videoberatung",
     },
   },
   key: { apikey: process.env.DAILY_API_KEY },

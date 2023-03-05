@@ -3,7 +3,7 @@ import type { AppMeta } from "@calcom/types/App";
 import _package from "./package.json";
 
 export const metadata = {
-  name: "Videoberatung",
+  name: "Jitsi Video",
   description: _package.description,
   installed: true,
   type: "jitsi_video",
@@ -25,7 +25,7 @@ export const metadata = {
     location: {
       linkType: "dynamic",
       type: "integrations:jitsi",
-      label: "Videoberatung",
+      label: "Jitsi Video",
     },
   },
   dirName: "jitsivideo",
