@@ -102,6 +102,14 @@ const DailyVideoApiAdapter = (): VideoApiAdapter => {
       url: dailyEvent.url,
     });
   }
+  async function createDummyMeeting(endpoint: string, event: CalendarEvent): Promise<VideoCallData> {
+    return Promise.resolve({
+      type: "daily_video",
+      id: "dailyEvent.name",
+      password: "meetingToken.token",
+      url: process.env.NEXT_PUBLIC_WEBSITE_URL,
+    });
+  }
 
   const translateEvent = async (event: CalendarEvent) => {
     // Documentation at: https://docs.daily.co/reference#list-rooms
@@ -142,7 +150,7 @@ const DailyVideoApiAdapter = (): VideoApiAdapter => {
       return Promise.resolve([]);
     },
     createMeeting: async (event: CalendarEvent): Promise<VideoCallData> =>
-      createOrUpdateMeeting("/rooms", event),
+      createDummyMeeting("/rooms", event),
     deleteMeeting: async (uid: string): Promise<void> => {
       await fetcher(`/rooms/${uid}`, { method: "DELETE" });
       return Promise.resolve();
