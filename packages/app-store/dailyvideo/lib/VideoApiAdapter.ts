@@ -152,11 +152,10 @@ const DailyVideoApiAdapter = (): VideoApiAdapter => {
     createMeeting: async (event: CalendarEvent): Promise<VideoCallData> =>
       createDummyMeeting("/rooms", event),
     deleteMeeting: async (uid: string): Promise<void> => {
-      await fetcher(`/rooms/${uid}`, { method: "DELETE" });
       return Promise.resolve();
     },
     updateMeeting: (bookingRef: PartialReference, event: CalendarEvent): Promise<VideoCallData> =>
-      createOrUpdateMeeting(`/rooms/${bookingRef.uid}`, event),
+      createDummyMeeting(`/rooms/${bookingRef.uid}`, event),
     getRecordings: async (roomName: string): Promise<GetRecordingsResponseSchema> => {
       try {
         const res = await fetcher(`/recordings?room_name=${roomName}`).then(
