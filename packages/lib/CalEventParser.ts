@@ -208,7 +208,7 @@ export const getVideoCallUrl = (calEvent: CalendarEvent): string => {
     if (isDailyVideoCall(calEvent)) {
       return getPublicVideoCallUrl(calEvent);
     }
-    return calEvent.videoCallData.url;
+    return WEBSITE_URL || calEvent.videoCallData.url;
   }
   if (calEvent.additionalInformation?.hangoutLink) {
     return calEvent.additionalInformation.hangoutLink;
