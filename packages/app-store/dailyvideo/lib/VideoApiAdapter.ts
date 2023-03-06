@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { WEBSITE_URL } from "@calcom/lib/constants";
 import { handleErrorsJson } from "@calcom/lib/errors";
 import type { GetRecordingsResponseSchema } from "@calcom/prisma/zod-utils";
 import { getRecordingsResponseSchema } from "@calcom/prisma/zod-utils";
@@ -107,7 +108,7 @@ const DailyVideoApiAdapter = (): VideoApiAdapter => {
       type: "daily_video",
       id: "dailyEvent.name",
       password: "meetingToken.token",
-      url: process.env.NEXT_PUBLIC_WEBSITE_URL,
+      url: WEBSITE_URL,
     });
   }
 
