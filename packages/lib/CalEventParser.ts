@@ -3,7 +3,7 @@ import { v5 as uuidv5 } from "uuid";
 
 import type { CalendarEvent } from "@calcom/types/Calendar";
 
-import { WEBAPP_URL } from "./constants";
+import { WEBAPP_URL, WEBSITE_URL } from "./constants";
 
 const translator = short();
 
@@ -198,8 +198,9 @@ export const isDailyVideoCall = (calEvent: CalendarEvent): boolean => {
   return calEvent?.videoCallData?.type === "daily_video";
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getPublicVideoCallUrl = (calEvent: CalendarEvent): string => {
-  return WEBAPP_URL + "/video/" + getUid(calEvent);
+  return WEBSITE_URL;
 };
 
 export const getVideoCallUrl = (calEvent: CalendarEvent): string => {
