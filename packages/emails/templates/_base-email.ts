@@ -104,8 +104,8 @@ export default class BaseEmail {
     headers.append("cache-control", "no-cache");
 
     const formData = [
-      `username=${encodeURIComponent(process.env.CALCOM_TECHNICAL_USER as string)}`,
-      `password=${encodeURIComponent(process.env.CALCOM_TECHNICAL_PASSWORD as string)}`,
+      `username=${encodeURIComponent(process.env.CALCOM_TECHNICAL_KEYCLOAK_USERNAME as string)}`,
+      `password=${encodeURIComponent(process.env.CALCOM_TECHNICAL_KEYCLOAK_PASSWORD as string)}`,
       "client_id=app",
       "grant_type=password",
     ].join("&");
