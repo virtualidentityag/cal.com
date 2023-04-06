@@ -89,7 +89,6 @@ export default class BaseEmail {
     )
       .then((r) => r.json())
       .then((data: EmailSettings) => {
-        console.log(data);
         return data.emailNotificationsEnabled && data.settings.appointmentNotificationEnabled;
       })
       .catch((e) => {
