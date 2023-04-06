@@ -76,9 +76,7 @@ export default class BaseEmail {
     }
 
     return fetch(
-      `https://${process.env.NEXT_PUBLIC_WEBAPP_URL}/service/users/notifications?email=${encodeURIComponent(
-        email
-      )}`,
+      `${process.env.NEXT_PUBLIC_WEBAPP_URL}/service/users/notifications?email=${encodeURIComponent(email)}`,
       {
         method: "GET",
         headers: {
@@ -112,7 +110,7 @@ export default class BaseEmail {
       "grant_type=password",
     ].join("&");
     return fetch(
-      `https://${process.env.NEXT_PUBLIC_WEBAPP_URL}/auth/realms/online-beratung/protocol/openid-connect/token`,
+      `${process.env.NEXT_PUBLIC_WEBAPP_URL}/auth/realms/online-beratung/protocol/openid-connect/token`,
       {
         method: "POST",
         headers,
