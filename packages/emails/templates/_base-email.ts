@@ -2,6 +2,7 @@ import nodemailer from "nodemailer";
 
 import type { Dayjs } from "@calcom/dayjs";
 import dayjs from "@calcom/dayjs";
+import { WEBSITE_URL } from "@calcom/lib/constants";
 import { getErrorFromUnknown } from "@calcom/lib/errors";
 import { serverConfig } from "@calcom/lib/serverConfig";
 
@@ -75,18 +76,15 @@ export default class BaseEmail {
       return false;
     }
 
-    return fetch(
-      `${process.env.NEXT_PUBLIC_WEBSITE_URL}/service/users/notifications?email=${encodeURIComponent(email)}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-          Cookie: `CSRF-TOKEN=${csrf};`,
-          "x-csrf-token": csrf,
-        },
-      }
-    )
+    return fetch(`${WEBSITE_URL}/service/users/notifications?email=${encodeURIComponent(email)}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+        Cookie: `CSRF-TOKEN=${csrf};`,
+        "x-csrf-token": csrf,
+      },
+    })
       .then((r) => r.json())
       .then((data: EmailSettings) => {
         return data.emailNotificationsEnabled && data.settings.appointmentNotificationEnabled;
@@ -108,14 +106,11 @@ export default class BaseEmail {
       "client_id=app",
       "grant_type=password",
     ].join("&");
-    return fetch(
-      `${process.env.NEXT_PUBLIC_WEBSITE_URL}/auth/realms/online-beratung/protocol/openid-connect/token`,
-      {
-        method: "POST",
-        headers,
-        body: formData,
-      }
-    )
+    return fetch(`${WEBSITE_URL}/auth/realms/online-beratung/protocol/openid-connect/token`, {
+      method: "POST",
+      headers,
+      body: formData,
+    })
       .then((res) => res.json())
       .then((res) => res.access_token)
       .catch((e) => {
