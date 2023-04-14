@@ -220,6 +220,22 @@ export default function Shell(props: LayoutProps) {
   useRedirectToOnboardingIfNeeded();
   useTheme("light");
 
+  useEffect(() => {
+    if (parent === window) {
+      return;
+    }
+
+    const fn = () => {
+      parent?.postMessage?.({ resize: document.documentElement.scrollHeight }, "*");
+    };
+    addEventListener("click", fn);
+    addEventListener("resize", fn);
+    return () => {
+      removeEventListener("click", fn);
+      removeEventListener("resize", fn);
+    };
+  });
+
   return !props.isPublic ? (
     <KBarWrapper withKBar>
       <CustomBrandingContainer />
