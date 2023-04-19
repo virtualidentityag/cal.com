@@ -139,7 +139,7 @@ const Layout = (props: LayoutProps) => {
         />
       )}
       <div>
-        <Toaster position="bottom-right" />
+        <Toaster position="top-center" />
       </div>
 
       {/* todo: only run this if timezone is different */}
