@@ -87,12 +87,21 @@ export default class BaseEmail {
         },
       }
     )
+      .then((r) => {
+        if (r.status > 404) {
+          console.error(`Failed Getting user notifications for user: ${email}`, e);
+          throw new Error(`No user found for email`);
+        }
+        return r;
+      })
       .then((r) => r.json())
       .then((data: EmailSettings) => {
         return data.emailNotificationsEnabled && data.settings.appointmentNotificationEnabled;
       })
       .catch((e) => {
-        console.error(`Failed Getting user notifications for user: ${email}`, e);
+        if (!e.message.match(/No user found for email/i)) {
+          console.error(`Failed Getting user notifications for user: ${email}`, e);
+        }
         return false;
       });
   }
