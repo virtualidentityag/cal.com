@@ -44,25 +44,29 @@ export default class BaseEmail {
       console.log("Skipped Sending Email as NEXT_PUBLIC_IS_E2E==1");
       return new Promise((r) => r("Skipped sendEmail for E2E"));
     }
-    this.isAbleToSend().then((allowedToSend) => {
-      if (!allowedToSend) {
-        return;
-      }
+    console.log("###################### SendEmail to ", this.getNodeMailerPayload().to);
+    console.log("###################### Full obj ", this.getNodeMailerPayload());
+    this.isAbleToSend()
+      .then((allowedToSend) => {
+        if (!allowedToSend) {
+          return;
+        }
 
-      new Promise((resolve, reject) =>
-        nodemailer
-          .createTransport(this.getMailerOptions().transport)
-          .sendMail(this.getNodeMailerPayload(), (_err, info) => {
-            if (_err) {
-              const err = getErrorFromUnknown(_err);
-              this.printNodeMailerError(err);
-              reject(err);
-            } else {
-              resolve(info);
-            }
-          })
-      ).catch((e) => console.error("sendEmail", e));
-    });
+        new Promise((resolve, reject) =>
+          nodemailer
+            .createTransport(this.getMailerOptions().transport)
+            .sendMail(this.getNodeMailerPayload(), (_err, info) => {
+              if (_err) {
+                const err = getErrorFromUnknown(_err);
+                this.printNodeMailerError(err);
+                reject(err);
+              } else {
+                resolve(info);
+              }
+            })
+        ).catch((e) => console.error("sendEmail", e));
+      })
+      .catch((e) => console.error("##### ERROR: isAbleToSend", e));
     return new Promise((resolve) => resolve("send mail async"));
   }
 
@@ -70,6 +74,8 @@ export default class BaseEmail {
     const csrf = this.generateCsrfToken();
     const token = await this.loginUserInApp();
     const email = (this.getNodeMailerPayload().to as string).replace(/.*\<|\>/g, "");
+    console.error(`################ Checking notification settings for email : ${email}`);
+    console.error(`################ Checking notification FULL TO : ${this.getNodeMailerPayload().to}`);
 
     if (!token) {
       return false;
@@ -89,7 +95,7 @@ export default class BaseEmail {
     )
       .then((r) => {
         if (r.status > 404) {
-          console.error(`Failed Getting user notifications for user: ${email}`, e);
+          console.error(`Failed Getting user notifications for user: ${email}`, r);
           throw new Error(`No user found for email`);
         }
         return r;
