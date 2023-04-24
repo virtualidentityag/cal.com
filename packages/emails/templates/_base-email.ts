@@ -45,7 +45,6 @@ export default class BaseEmail {
       return new Promise((r) => r("Skipped sendEmail for E2E"));
     }
     console.log("###################### SendEmail to ", this.getNodeMailerPayload().to);
-    console.log("###################### Full obj ", this.getNodeMailerPayload());
     this.isAbleToSend()
       .then((allowedToSend) => {
         if (!allowedToSend) {
@@ -75,7 +74,9 @@ export default class BaseEmail {
     const token = await this.loginUserInApp();
     const email = (this.getNodeMailerPayload().to as string).replace(/.*\<|\>/g, "");
     console.error(`################ Checking notification settings for email : ${email}`);
-    console.error(`################ Checking notification FULL TO : ${this.getNodeMailerPayload().to}`);
+    console.error(
+      `################ Checking notification FULL TO : ${this.getNodeMailerPayload().to} token ${token}`
+    );
 
     if (!token) {
       return false;
@@ -108,6 +109,8 @@ export default class BaseEmail {
       .catch((e) => {
         if (!e.message.match(/No user found for email/i)) {
           console.error(`Failed Getting user notifications for user: ${email}`, e);
+        } else {
+          console.error("No user found for email, skipping email sending", e);
         }
         return false;
       });
