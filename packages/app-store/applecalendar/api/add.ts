@@ -42,6 +42,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(500).json({ message: "Could not add this caldav account" });
     }
 
+    if (process.env.CALENDAR_INTEGRATION_CALLBACK_URL) {
+      return res.redirect(process.env.CALENDAR_INTEGRATION_CALLBACK_URL);
+    }
+
     return res
       .status(200)
       .json({ url: getInstalledAppPath({ variant: "calendar", slug: "apple-calendar" }) });
