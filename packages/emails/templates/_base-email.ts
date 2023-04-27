@@ -44,7 +44,6 @@ export default class BaseEmail {
       console.log("Skipped Sending Email as NEXT_PUBLIC_IS_E2E==1");
       return new Promise((r) => r("Skipped sendEmail for E2E"));
     }
-    console.log("###################### SendEmail to ", this.getNodeMailerPayload().to);
     this.isAbleToSend()
       .then((allowedToSend) => {
         if (!allowedToSend) {
@@ -73,10 +72,6 @@ export default class BaseEmail {
     const csrf = this.generateCsrfToken();
     const token = await this.loginUserInApp();
     const email = (this.getNodeMailerPayload().to as string).replace(/.*\<|\>/g, "");
-    console.error(`################ Checking notification settings for email : ${email}`);
-    console.error(
-      `################ Checking notification FULL TO : ${this.getNodeMailerPayload().to} token ${token}`
-    );
 
     if (!token) {
       return false;
@@ -103,7 +98,6 @@ export default class BaseEmail {
       })
       .then((r) => r.json())
       .then((data: EmailSettings) => {
-        console.error(`################ Checking settings: ${email}`, data);
         return data.emailNotificationsEnabled && data.settings.appointmentNotificationEnabled;
       })
       .catch((e) => {
