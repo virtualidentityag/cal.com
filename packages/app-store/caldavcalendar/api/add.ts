@@ -60,7 +60,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     if (process.env.CALENDAR_INTEGRATION_CALLBACK_URL) {
-      return res.redirect(process.env.CALENDAR_INTEGRATION_CALLBACK_URL);
+      return res.status(200).json({ url: process.env.CALENDAR_INTEGRATION_CALLBACK_URL });
     }
 
     return res
