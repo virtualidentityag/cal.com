@@ -85,7 +85,7 @@
   "join_by_entrypoint": "{{entryPoint}} beitreten",
   "notes": "Notizen",
   "manage_my_bookings": "Meine Buchungen verwalten",
-  "need_to_make_a_change": "Sie müssen eine Änderung vornehmen?",
+  "need_to_make_a_change": "Sie können den Termin nicht wahrnehmen?",
   "new_event_scheduled": "Ein neuer Termin wurde geplant.",
   "new_event_scheduled_recurring": "Ein neues wiederkehrender Termin wurde geplant.",
   "invitee_email": "Teilnehmer-Email",

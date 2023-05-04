@@ -85,7 +85,7 @@
   "join_by_entrypoint": "Join by {{entryPoint}}",
   "notes": "Notes",
   "manage_my_bookings": "Manage my bookings",
-  "need_to_make_a_change": "Need to make a change?",
+  "need_to_make_a_change": "You can't keep the appointment?",
   "new_event_scheduled": "A new event has been scheduled.",
   "new_event_scheduled_recurring": "A new recurring event has been scheduled.",
   "invitee_email": "Invitee Email",
