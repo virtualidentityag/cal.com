@@ -6,7 +6,6 @@ import logger from "@calcom/lib/logger";
 import type { CalendarEvent } from "@calcom/types/Calendar";
 
 import { Info } from "./Info";
-import { LinkIcon } from "./LinkIcon";
 
 export function LocationInfo(props: { calEvent: CalendarEvent; t: TFunction }) {
   const { t } = props;
@@ -33,28 +32,19 @@ export function LocationInfo(props: { calEvent: CalendarEvent; t: TFunction }) {
       <Info
         label={t("where")}
         withSpacer
-        description={
-          <a
-            href={meetingUrl}
-            target="_blank"
-            title={t("meeting_url")}
-            style={{ color: "#101010" }}
-            rel="noreferrer">
-            {providerName || "Link"} <LinkIcon />
-          </a>
-        }
-        extraInfo={
-          meetingUrl && (
-            <div style={{ color: "#494949", fontWeight: 400, lineHeight: "24px" }}>
-              <>
-                {t("meeting_url")}:{" "}
-                <a href={meetingUrl} title={t("meeting_url")} style={{ color: "#3E3E3E" }}>
-                  {meetingUrl}
-                </a>
-              </>
-            </div>
-          )
-        }
+        description={providerName || "Link"}
+        // extraInfo={
+        //   meetingUrl && (
+        //     <div style={{ color: "#494949", fontWeight: 400, lineHeight: "24px" }}>
+        //       <>
+        //         {t("meeting_url")}:{" "}
+        //         <a href={meetingUrl} title={t("meeting_url")} style={{ color: "#3E3E3E" }}>
+        //           {meetingUrl}
+        //         </a>
+        //       </>
+        //     </div>
+        //   )
+        // }
       />
     );
   }
