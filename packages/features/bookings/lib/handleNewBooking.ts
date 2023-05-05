@@ -34,7 +34,6 @@ import { deleteScheduledSMSReminder } from "@calcom/features/ee/workflows/lib/re
 import getWebhooks from "@calcom/features/webhooks/lib/getWebhooks";
 import { isPrismaObjOrUndefined, parseRecurringEvent } from "@calcom/lib";
 import { getVideoCallUrl } from "@calcom/lib/CalEventParser";
-import { getDSTDifference, isInDST } from "@calcom/lib/date-fns";
 import { getDefaultEvent, getGroupName, getUsernameList } from "@calcom/lib/defaultEvents";
 import { getErrorFromUnknown } from "@calcom/lib/errors";
 import getPaymentAppData from "@calcom/lib/getPaymentAppData";
@@ -55,7 +54,7 @@ import {
 import type { BufferedBusyTime } from "@calcom/types/BufferedBusyTime";
 import type { AdditionalInformation, AppsStatus, CalendarEvent } from "@calcom/types/Calendar";
 import type { EventResult, PartialReference } from "@calcom/types/EventManager";
-import type { WorkingHours } from "@calcom/types/schedule";
+import type { WorkingHours, TimeRange as DateOverride } from "@calcom/types/schedule";
 
 import type { EventTypeInfo } from "../../webhooks/lib/sendPayload";
 import sendPayload from "../../webhooks/lib/sendPayload";
@@ -107,41 +106,28 @@ const isWithinAvailableHours = (
   timeSlot: { start: ConfigType; end: ConfigType },
   {
     workingHours,
+    dateOverrides,
     organizerTimeZone,
     inviteeTimeZone,
   }: {
     workingHours: WorkingHours[];
+    dateOverrides: DateOverride[];
     organizerTimeZone: string;
     inviteeTimeZone: string;
   }
 ) => {
   const timeSlotStart = dayjs(timeSlot.start).utc();
   const timeSlotEnd = dayjs(timeSlot.end).utc();
-  const isOrganizerInDST = isInDST(dayjs().tz(organizerTimeZone));
-  const isInviteeInDST = isInDST(dayjs().tz(organizerTimeZone));
-  const isOrganizerInDSTWhenSlotStart = isInDST(timeSlotStart.tz(organizerTimeZone));
-  const isInviteeInDSTWhenSlotStart = isInDST(timeSlotStart.tz(inviteeTimeZone));
-  const organizerDSTDifference = getDSTDifference(organizerTimeZone);
-  const inviteeDSTDifference = getDSTDifference(inviteeTimeZone);
-  const sameDSTUsers = isOrganizerInDSTWhenSlotStart === isInviteeInDSTWhenSlotStart;
-  const organizerDST = isOrganizerInDST === isOrganizerInDSTWhenSlotStart;
-  const inviteeDST = isInviteeInDST === isInviteeInDSTWhenSlotStart;
+  const organizerDSTDiff =
+    dayjs().tz(organizerTimeZone).utcOffset() - timeSlotStart.tz(organizerTimeZone).utcOffset();
   const getTime = (slotTime: Dayjs, minutes: number) =>
-    slotTime
-      .startOf("day")
-      .add(
-        sameDSTUsers && organizerDST && inviteeDST
-          ? minutes
-          : minutes -
-              (isOrganizerInDSTWhenSlotStart || isOrganizerInDST
-                ? organizerDSTDifference
-                : inviteeDSTDifference),
-        "minutes"
-      );
+    slotTime.startOf("day").add(minutes + organizerDSTDiff, "minutes");
 
   for (const workingHour of workingHours) {
     const startTime = getTime(timeSlotStart, workingHour.startTime);
-    const endTime = getTime(timeSlotEnd, workingHour.endTime);
+    // workingHours function logic set 1439 minutes when user select the end of the day (11:59) in his schedule
+    // so, we need to add a minute, to avoid, "No available user" error when the last available slot is selected.
+    const endTime = getTime(timeSlotEnd, workingHour.endTime === 1439 ? 1440 : workingHour.endTime);
     if (
       workingHour.days.includes(timeSlotStart.day()) &&
       // UTC mode, should be performant.
@@ -151,6 +137,24 @@ const isWithinAvailableHours = (
       return true;
     }
   }
+
+  // check if it is a date override
+  for (const dateOverride of dateOverrides) {
+    const utcOffSet = dayjs(dateOverride.start).tz(inviteeTimeZone).utcOffset();
+
+    const slotStart = dayjs(timeSlotStart).add(utcOffSet, "minute");
+    const slotEnd = dayjs(timeSlotEnd).add(utcOffSet, "minute");
+    if (
+      slotStart.isBetween(dateOverride.start, dateOverride.end, null, "[]") &&
+      slotEnd.isBetween(dateOverride.start, dateOverride.end, null, "[]")
+    ) {
+      return true;
+    }
+  }
+
+  log.error(
+    `NAUF: isWithinAvailableHours ${JSON.stringify({ ...timeSlot, organizerTimeZone, workingHours })}`
+  );
   return false;
 };
 
@@ -274,7 +278,11 @@ async function ensureAvailableUsers(
   const availableUsers: IsFixedAwareUser[] = [];
   /** Let's start checking for availability */
   for (const user of eventType.users) {
-    const { busy: bufferedBusyTimes, workingHours } = await getUserAvailability(
+    const {
+      busy: bufferedBusyTimes,
+      workingHours,
+      dateOverrides,
+    } = await getUserAvailability(
       {
         userId: user.id,
         eventTypeId: eventType.id,
@@ -289,6 +297,7 @@ async function ensureAvailableUsers(
         { start: input.dateFrom, end: input.dateTo },
         {
           workingHours,
+          dateOverrides,
           organizerTimeZone: eventType.timeZone || eventType?.schedule?.timeZone || user.timeZone,
           inviteeTimeZone: input.timeZone,
         }

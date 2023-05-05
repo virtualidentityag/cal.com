@@ -432,8 +432,8 @@ const BookingPage = ({
       const recurringEventId = uuidv4();
       const recurringBookings = recurringDates.map((recurringDate) => ({
         ...booking,
-        start: dayjs(recurringDate).format(),
-        end: dayjs(recurringDate).add(duration, "minute").format(),
+        start: dayjs(recurringDate).utc().format(),
+        end: dayjs(recurringDate).utc().add(duration, "minute").format(),
         eventTypeId: eventType.id,
         eventTypeSlug: eventType.slug,
         recurringEventId,
@@ -463,8 +463,8 @@ const BookingPage = ({
     } else {
       mutation.mutate({
         ...booking,
-        start: dayjs(date).format(),
-        end: dayjs(date).add(duration, "minute").format(),
+        start: dayjs(date).utc().format(),
+        end: dayjs(date).utc().add(duration, "minute").format(),
         eventTypeId: eventType.id,
         eventTypeSlug: eventType.slug,
         timeZone: timeZone(),
