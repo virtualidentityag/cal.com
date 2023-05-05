@@ -25,7 +25,7 @@ export const BaseEmailHtml = (props: {
   callToAction?: React.ReactNode;
   subject: string;
   title?: string;
-  subtitle?: React.ReactNode;
+  subtitle?: React.ReactNode | string;
   headerType?: BodyHeadType;
   calEvent?: CalendarEvent;
   t?: TFunction;

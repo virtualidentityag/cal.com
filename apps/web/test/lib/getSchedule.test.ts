@@ -1,3 +1,7 @@
+/**
+ * !: Stops the `jose` dependency from bundling the browser version and breaking tests
+ * @jest-environment node
+ */
 import type {
   EventType as PrismaEventType,
   User as PrismaUser,
@@ -19,6 +23,7 @@ import { prismaMock, CalendarManagerMock } from "../../../../tests/config/single
 // TODO: Mock properly
 prismaMock.eventType.findUnique.mockResolvedValue(null);
 prismaMock.user.findMany.mockResolvedValue([]);
+prismaMock.selectedSlots.findMany.mockResolvedValue([]);
 
 jest.mock("@calcom/lib/constants", () => ({
   IS_PRODUCTION: true,
@@ -148,7 +153,7 @@ const TestData = {
 };
 
 const ctx = {
-  prisma,
+  prisma: prismaMock,
 };
 
 type App = {
@@ -504,6 +509,7 @@ describe("getSchedule", () => {
       );
     });
 
+    // FIXME: Fix minimumBookingNotice is respected test
     test.skip("minimumBookingNotice is respected", async () => {
       jest.useFakeTimers().setSystemTime(
         (() => {

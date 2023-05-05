@@ -1,5 +1,6 @@
 import type { DateArray } from "ics";
 import { createEvent } from "ics";
+import { cloneDeep } from "lodash";
 import type { TFunction } from "next-i18next";
 import { RRule } from "rrule";
 
@@ -33,13 +34,14 @@ export default class OrganizerScheduledEmail extends BaseEmail {
       recurrenceRule = new RRule(this.calEvent.recurringEvent).toString().replace("RRULE:", "");
     }
     const icsEvent = createEvent({
+      uid: this.calEvent.iCalUID || this.calEvent.uid!,
       start: dayjs(this.calEvent.startTime)
         .utc()
         .toArray()
         .slice(0, 6)
         .map((v, i) => (i === 1 ? v + 1 : v)) as DateArray,
       startInputType: "utc",
-      productId: "calendso/ics",
+      productId: "calcom/ics",
       title: this.calEvent.title,
       description: this.getTextBody(),
       duration: { minutes: dayjs(this.calEvent.endTime).diff(dayjs(this.calEvent.startTime), "minute") },
@@ -64,7 +66,17 @@ export default class OrganizerScheduledEmail extends BaseEmail {
   }
 
   protected getNodeMailerPayload(): Record<string, unknown> {
-    const toAddresses = [this.teamMember?.email || this.calEvent.organizer.email];
+    const clonedCalEvent = cloneDeep(this.calEvent);
+
+    const toAddresses = [this.calEvent.organizer.email];
+    if (this.calEvent.team) {
+      this.calEvent.team.members.forEach((member) => {
+        const memberAttendee = this.calEvent.attendees.find((attendee) => attendee.email === member.email);
+        if (memberAttendee) {
+          toAddresses.push(memberAttendee.email);
+        }
+      });
+    }
 
     return {
       icalEvent: {
@@ -73,11 +85,9 @@ export default class OrganizerScheduledEmail extends BaseEmail {
       },
       from: `${APP_NAME} <${this.getMailerOptions().from}>`,
       to: toAddresses.join(","),
-      subject: decodeURIComponent(
-        `${this.newSeat ? this.t("new_attendee") + ":" : ""} ${this.calEvent.title}`
-      ),
+      subject: `${this.newSeat ? this.t("new_attendee") + ":" : ""} ${this.calEvent.title}`,
       html: renderEmail("OrganizerScheduledEmail", {
-        calEvent: this.calEvent,
+        calEvent: clonedCalEvent,
         attendee: this.calEvent.organizer,
         teamMember: this.teamMember,
         newSeat: this.newSeat,
