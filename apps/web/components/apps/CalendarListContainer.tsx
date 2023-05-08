@@ -264,7 +264,7 @@ export function CalendarListContainer(props: { heading?: boolean; fromOnboarding
             {!!data.connectedCalendars.length || !!installedCalendars.data?.items.length ? (
               <div className="bg-white">
                 {heading && (
-                  <div className="flex flex-col gap-6 rounded-md  border-gray-200 p-7">
+                  <div className="border-default flex flex-col gap-6 rounded-md border p-7">
                     <div style={{ display: "none" }}>
                       <ShellSubHeading
                         title={t("calendar")}
@@ -281,7 +281,7 @@ export function CalendarListContainer(props: { heading?: boolean; fromOnboarding
                         }
                       />
                     </div>
-                    <div className="flex justify-between rounded-md border border-gray-200 bg-white p-4">
+                    <div className="bg-muted border-subtle flex justify-between rounded-md border p-4">
                       <div className="flex w-full flex-col items-start gap-4 md:flex-row md:items-center">
                         <div className="bg-default border-subtle relative rounded-md border p-1.5">
                           <Calendar className="text-default h-8 w-8" strokeWidth="1" />

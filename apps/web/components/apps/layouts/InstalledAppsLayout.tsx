@@ -57,9 +57,11 @@ export default function InstalledAppsLayout({
   }
 
   return (
+    // <Shell {...rest} hideHeadingOnMobile>
     <AppCategoryNavigation baseURL="/apps/installed" containerClassname="min-w-0 w-full">
       {children}
     </AppCategoryNavigation>
+    // </Shell>
   );
 }
 export const getLayout = (page: React.ReactElement) => <InstalledAppsLayout>{page}</InstalledAppsLayout>;
