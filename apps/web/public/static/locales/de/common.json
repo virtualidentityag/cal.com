@@ -1481,6 +1481,7 @@
   "meeting_url_info": "Die URL der Meeting-Konferenz",
   "date_overrides": "Datumsüberschreibungen",
   "date_overrides_subtitle": "Fügen Sie Termine hinzu, an denen Ihre Verfügbarkeit von Ihren üblichen Geschäftszeiten abweicht.",
+  "add_override": "Datumsüberschreibung hinzufügen",
   "date_overrides_info": "Überschreibungsdaten werden automatisch nach Überschreitung des Datums archiviert",
   "date_overrides_dialog_which_hours": "Zu welchen Stunden sind Sie verfügbar?",
   "date_overrides_dialog_which_hours_unavailable": "Zu welchen Stunden sind Sie beschäftigt?",
