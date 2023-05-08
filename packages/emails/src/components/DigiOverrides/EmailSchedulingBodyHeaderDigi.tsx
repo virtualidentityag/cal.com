@@ -6,7 +6,7 @@ import { WEBAPP_URL, IS_PRODUCTION } from "@calcom/lib/constants";
 import EmailCommonDivider from "../EmailCommonDivider";
 import Row from "../Row";
 
-export type BodyHeadType = "checkCircle" | "xCircle" | "calendarCircle";
+export type BodyHeadType = "checkCircle" | "xCircle" | "calendarCircle" | "teamCircle";
 
 export const getHeadImage = (headerType: BodyHeadType): string => {
   switch (headerType) {
