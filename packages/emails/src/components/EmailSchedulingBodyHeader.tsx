@@ -23,7 +23,7 @@ export const getHeadImage = (headerType: BodyHeadType): string => {
         : "https://app.cal.com/emails/calendarCircle@2x.png";
     case "teamCircle":
       return IS_PRODUCTION
-        ? BASE_URL + "/emails/teamCircle@2x.png"
+        ? WEBAPP_URL + "/emails/teamCircle@2x.png"
         : "https://app.cal.com/emails/teamCircle@2x.png";
   }
 };

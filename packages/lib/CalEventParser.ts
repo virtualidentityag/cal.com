@@ -3,7 +3,7 @@ import { v5 as uuidv5 } from "uuid";
 
 import type { CalendarEvent } from "@calcom/types/Calendar";
 
-import { WEBAPP_URL } from "./constants";
+import { WEBAPP_URL, WEBSITE_URL } from "./constants";
 import getLabelValueMapFromResponses from "./getLabelValueMapFromResponses";
 
 const translator = short();

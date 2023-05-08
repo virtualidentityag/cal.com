@@ -20,6 +20,7 @@ import { cancelScheduledJobs, scheduleTrigger } from "@calcom/app-store/zapier/l
 import EventManager from "@calcom/core/EventManager";
 import { getEventName } from "@calcom/core/event";
 import { getUserAvailability } from "@calcom/core/getUserAvailability";
+import { deleteMeeting } from "@calcom/core/videoClient";
 import type { ConfigType, Dayjs } from "@calcom/dayjs";
 import dayjs from "@calcom/dayjs";
 import {
