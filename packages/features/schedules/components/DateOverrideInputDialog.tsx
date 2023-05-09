@@ -104,8 +104,8 @@ const DateOverrideForm = ({
     const dayRanges = (workingHours || []).reduce((dayRanges, workingHour) => {
       if (date && workingHour.days.includes(date.day())) {
         dayRanges.push({
-          start: dayjs.utc().startOf("day").add(workingHour.startTime, "minute").toDate(),
-          end: dayjs.utc().startOf("day").add(workingHour.endTime, "minute").toDate(),
+          start: dayjs.utc().startOf("day").add(workingHour.startTime, "minute").local().toDate(),
+          end: dayjs.utc().startOf("day").add(workingHour.endTime, "minute").local().toDate(),
         });
       }
       return dayRanges;
