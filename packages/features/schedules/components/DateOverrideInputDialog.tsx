@@ -1,12 +1,13 @@
 import { useState, useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 
-import dayjs, { Dayjs } from "@calcom/dayjs";
+import type { Dayjs } from "@calcom/dayjs";
+import dayjs from "@calcom/dayjs";
 import { classNames } from "@calcom/lib";
 import { daysInMonth, yyyymmdd } from "@calcom/lib/date-fns";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import useMediaQuery from "@calcom/lib/hooks/useMediaQuery";
-import { WorkingHours } from "@calcom/types/schedule";
+import type { WorkingHours } from "@calcom/types/schedule";
 import {
   Dialog,
   DialogContent,
@@ -19,7 +20,8 @@ import {
 } from "@calcom/ui";
 
 import DatePicker from "../../calendars/DatePicker";
-import { DayRanges, TimeRange } from "./Schedule";
+import type { TimeRange } from "./Schedule";
+import { DayRanges } from "./Schedule";
 
 const ALL_DAY_RANGE = {
   start: new Date(dayjs.utc().hour(0).minute(0).second(0).format()),
@@ -78,10 +80,22 @@ const DateOverrideForm = ({
       reset({
         range: value.map((range) => ({
           start: new Date(
-            dayjs.utc().hour(range.start.getUTCHours()).minute(range.start.getUTCMinutes()).second(0).format()
+            dayjs
+              .utc()
+              .hour(range.start.getUTCHours())
+              .minute(range.start.getUTCMinutes())
+              .second(0)
+              .local()
+              .format()
           ),
           end: new Date(
-            dayjs.utc().hour(range.end.getUTCHours()).minute(range.end.getUTCMinutes()).second(0).format()
+            dayjs
+              .utc()
+              .hour(range.end.getUTCHours())
+              .minute(range.end.getUTCMinutes())
+              .second(0)
+              .local()
+              .format()
           ),
         })),
       });
