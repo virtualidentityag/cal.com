@@ -80,22 +80,10 @@ const DateOverrideForm = ({
       reset({
         range: value.map((range) => ({
           start: new Date(
-            dayjs
-              .utc()
-              .hour(range.start.getUTCHours())
-              .minute(range.start.getUTCMinutes())
-              .second(0)
-              .local()
-              .format()
+            dayjs.utc().hour(range.start.getUTCHours()).minute(range.start.getUTCMinutes()).second(0).format()
           ),
           end: new Date(
-            dayjs
-              .utc()
-              .hour(range.end.getUTCHours())
-              .minute(range.end.getUTCMinutes())
-              .second(0)
-              .local()
-              .format()
+            dayjs.utc().hour(range.end.getUTCHours()).minute(range.end.getUTCMinutes()).second(0).format()
           ),
         })),
       });
@@ -104,8 +92,8 @@ const DateOverrideForm = ({
     const dayRanges = (workingHours || []).reduce((dayRanges, workingHour) => {
       if (date && workingHour.days.includes(date.day())) {
         dayRanges.push({
-          start: dayjs.utc().startOf("day").add(workingHour.startTime, "minute").local().toDate(),
-          end: dayjs.utc().startOf("day").add(workingHour.endTime, "minute").local().toDate(),
+          start: dayjs.utc().startOf("day").add(workingHour.startTime, "minute").toDate(),
+          end: dayjs.utc().startOf("day").add(workingHour.endTime, "minute").toDate(),
         });
       }
       return dayRanges;

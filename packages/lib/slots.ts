@@ -87,7 +87,7 @@ function buildSlots({
     for (let slotStart = boundaryStart; slotStart < boundaryEnd; slotStart += frequency) {
       computedLocalAvailability.forEach((item) => {
         // TODO: This logic does not allow for past-midnight bookings.
-        if (slotStart < item.startTime || slotStart > item.endTime + 15 - eventLength) {
+        if (slotStart < item.startTime || slotStart > item.endTime + 1 - eventLength) {
           return;
         }
         slotsTimeFrameAvailable[slotStart.toString()] = {
@@ -103,14 +103,12 @@ function buildSlots({
     dayjs().tz(organizerTimeZone).utcOffset() - startOfInviteeDay.tz(organizerTimeZone).utcOffset();
   const inviteeDSTDiff =
     dayjs().tz(inviteeTimeZone).utcOffset() - startOfInviteeDay.tz(inviteeTimeZone).utcOffset();
-
   const slots: { time: Dayjs; userIds?: number[] }[] = [];
   const getTime = (time: number) => {
     const minutes = time + organizerDSTDiff - inviteeDSTDiff;
 
     return startOfInviteeDay.tz(inviteeTimeZone).add(minutes, "minutes");
   };
-
   for (const item of Object.values(slotsTimeFrameAvailable)) {
     /*
      * @calcom/web:dev: 2022-11-06T00:00:00-04:00
@@ -120,15 +118,10 @@ function buildSlots({
      * @calcom/web:dev: 2022-11-06T03:00:00-04:00
      * ...
      */
-    const slot = {
+    slots.push({
       userIds: item.userIds,
       time: getTime(item.startTime),
-    };
-    // If the startOfInviteeDay has a different UTC offset than the slot, a DST change has occurred.
-    // As the time has now fallen backwards, or forwards; this difference -
-    // needs to be manually added as this is not done for us. Usually 0.
-    slot.time = slot.time.add(startOfInviteeDay.utcOffset() - slot.time.utcOffset(), "minutes");
-    slots.push(slot);
+    });
   }
   return slots;
 }
@@ -167,7 +160,6 @@ const getSlots = ({
   }
 
   const timeZone: string = getTimeZone(inviteeDate);
-
   const workingHoursUTC = workingHours.map((schedule) => ({
     userId: schedule.userId,
     days: schedule.days,
