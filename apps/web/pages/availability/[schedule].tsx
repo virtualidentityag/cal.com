@@ -63,7 +63,7 @@ const DateOverride = ({ workingHours }: { workingHours: WorkingHours[] }) => {
       <p className="mb-4 text-sm text-gray-500">{t("date_overrides_subtitle")}</p>
       <div className="space-y-2">
         <DateOverrideList
-          excludedDates={fields.map((field) => yyyymmdd(field.ranges[0].start))}
+          excludedDates={[]}
           remove={remove}
           update={update}
           items={fields}
@@ -93,6 +93,7 @@ export default function Availability({ schedule }: { schedule: number }) {
   const { data: defaultValues } = trpc.viewer.availability.defaultValues.useQuery({ scheduleId: schedule });
   const form = useForm<AvailabilityFormValues>({ defaultValues });
   const { control } = form;
+
   const updateMutation = trpc.viewer.availability.schedule.update.useMutation({
     onSuccess: async ({ prevDefaultId, currentDefaultId, ...data }) => {
       if (prevDefaultId && currentDefaultId) {

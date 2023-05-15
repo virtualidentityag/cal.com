@@ -172,7 +172,8 @@ const getSlots = ({
       // initialize current day with timeZone without conversion, just parse.
       utcOffset: -dayjs.tz(dayjs(), timeZone).utcOffset(),
     },
-    workingHoursUTC
+    workingHoursUTC,
+    false
   ).filter((hours) => hours.days.includes(inviteeDate.day()));
 
   // Here we split working hour in chunks for every frequency available that can fit in whole working hours
