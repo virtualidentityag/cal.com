@@ -22,7 +22,7 @@ export function useViewerI18n() {
  */
 const I18nLanguageHandler = (): null => {
   const { i18n } = useTranslation("common");
-  const locale = useViewerI18n().data?.locale || "en";
+  const locale = "de"; //useViewerI18n().data?.locale || "de";
 
   useEffect(() => {
     if (locale && i18n.language && i18n.language !== locale) {

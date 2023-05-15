@@ -44,7 +44,7 @@ const CustomI18nextProvider = (props: AppPropsWithChildren) => {
   const { i18n, locale } = trpc.viewer.public.i18n.useQuery(undefined, {
     trpc: { context: { skipBatch: true } },
   }).data ?? {
-    locale: "en",
+    locale: "de",
   };
 
   const passedProps = {

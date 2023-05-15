@@ -1,18 +1,14 @@
-import parser from "accept-language-parser";
 import type { IncomingMessage } from "http";
-
-import type { Maybe } from "@calcom/trpc/server";
 
 import { getSession } from "@lib/auth";
 
-import { i18n } from "../../../next-i18next.config";
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function getLocaleFromHeaders(req: IncomingMessage): string {
-  let preferredLocale: string | null | undefined;
-  if (req.headers["accept-language"]) {
-    preferredLocale = parser.pick(i18n.locales, req.headers["accept-language"]) as Maybe<string>;
-  }
-  return preferredLocale ?? i18n.defaultLocale;
+  // let preferredLocale: string | null | undefined;
+  // if (req.headers["accept-language"]) {
+  //   preferredLocale = parser.pick(i18n.locales, req.headers["accept-language"]) as Maybe<string>;
+  // }
+  return "de"; //preferredLocale ?? i18n.defaultLocale;
 }
 
 export const getOrSetUserLocaleFromHeaders = async (req: IncomingMessage): Promise<string> => {
@@ -44,5 +40,5 @@ export const getOrSetUserLocaleFromHeaders = async (req: IncomingMessage): Promi
     });
   }
 
-  return preferredLocale;
+  return "de";
 };

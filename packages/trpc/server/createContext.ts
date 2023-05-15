@@ -4,13 +4,12 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 import { getSession } from "@calcom/lib/auth";
 import { WEBAPP_URL } from "@calcom/lib/constants";
-import { getLocaleFromHeaders } from "@calcom/lib/i18n";
 import { defaultAvatarSrc } from "@calcom/lib/profile";
 import prisma from "@calcom/prisma";
 
-import * as trpc from "@trpc/server";
-import { Maybe } from "@trpc/server";
-import * as trpcNext from "@trpc/server/adapters/next";
+import type * as trpc from "@trpc/server";
+import type { Maybe } from "@trpc/server";
+import type * as trpcNext from "@trpc/server/adapters/next";
 
 type CreateContextOptions = trpcNext.CreateNextContextOptions | GetServerSidePropsContext;
 
@@ -91,7 +90,7 @@ async function getUserFromSession({
   // This helps to prevent reaching the 4MB payload limit by avoiding base64 and instead passing the avatar url
   user.avatar = rawAvatar ? `${WEBAPP_URL}/${user.username}/avatar.png` : defaultAvatarSrc({ email });
 
-  const locale = user.locale || getLocaleFromHeaders(req);
+  const locale = "de"; //user.locale || getLocaleFromHeaders(req);
   return {
     ...user,
     rawAvatar,
@@ -133,7 +132,7 @@ export const createContext = async ({ req, res }: CreateContextOptions, sessionG
   const session = await sessionGetter({ req });
 
   const user = await getUserFromSession({ session, req });
-  const locale = user?.locale ?? getLocaleFromHeaders(req);
+  const locale = "de"; //user?.locale ?? getLocaleFromHeaders(req);
   const i18n = await serverSideTranslations(locale, ["common", "vital"]);
 
   const contextInner = await createContextInner({ session, i18n, locale, user });
