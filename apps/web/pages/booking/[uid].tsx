@@ -43,7 +43,7 @@ import type { Prisma } from "@calcom/prisma/client";
 import { bookingMetadataSchema } from "@calcom/prisma/zod-utils";
 import { customInputSchema, EventTypeMetaDataSchema } from "@calcom/prisma/zod-utils";
 import { Button, EmailInput, HeadSeo } from "@calcom/ui";
-import { FiX, FiExternalLink, FiChevronLeft, FiCheck, FiCalendar } from "@calcom/ui/components/icon";
+import { FiX, FiChevronLeft, FiCheck, FiCalendar } from "@calcom/ui/components/icon";
 
 import { timeZone } from "@lib/clock";
 import type { inferSSRProps } from "@lib/types/inferSSRProps";
@@ -492,7 +492,7 @@ export default function Success(props: SuccessProps) {
                         isCancelled={isCancelled}
                       />
                     </div>
-                    {(bookingInfo?.user || bookingInfo?.attendees) && (
+                    {/* {(bookingInfo?.user || bookingInfo?.attendees) && (
                       <>
                         <div className="font-medium">{t("who")}</div>
                         <div className="col-span-2 last:mb-0">
@@ -514,24 +514,23 @@ export default function Success(props: SuccessProps) {
                           </>
                         </div>
                       </>
-                    )}
+                    )} */}
                     {locationToDisplay && !isCancelled && (
                       <>
                         <div className="mt-3 font-medium">{t("where")}</div>
                         <div className="col-span-2 mt-3">
-                          {locationToDisplay.startsWith("http") ? (
-                            <a
-                              href={locationToDisplay}
-                              target="_blank"
-                              title={locationToDisplay}
-                              className="flex items-center gap-2 text-gray-700 underline dark:text-gray-50"
-                              rel="noreferrer">
-                              {providerName || "Link"}
-                              <FiExternalLink className="inline h-4 w-4 text-gray-700 dark:text-white" />
-                            </a>
-                          ) : (
-                            locationToDisplay
-                          )}
+                          {locationToDisplay.startsWith("http")
+                            ? // <a
+                              //   href={locationToDisplay}
+                              //   target="_blank"
+                              //   title={locationToDisplay}
+                              //   className="flex items-center gap-2 text-gray-700 underline dark:text-gray-50"
+                              //   rel="noreferrer">
+                              //   {providerName || "Link"}
+                              //   <FiExternalLink className="inline h-4 w-4 text-gray-700 dark:text-white" />
+                              // </a>
+                              providerName || "Link"
+                            : locationToDisplay}
                         </div>
                       </>
                     )}

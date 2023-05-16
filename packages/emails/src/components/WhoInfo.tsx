@@ -12,6 +12,8 @@ const PersonInfo = ({ name = "", role = "" }) => (
 
 export function WhoInfo(props: { calEvent: CalendarEvent; t: TFunction }) {
   const { t } = props;
+  return null;
+
   return (
     <Info
       label={t("who")}
