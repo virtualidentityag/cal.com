@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React, { Fragment } from "react";
 
 import { availabilityAsString } from "@calcom/lib/availability";
@@ -38,10 +37,10 @@ export function ScheduleListItem({
     <li key={schedule.id}>
       <div className="flex items-center justify-between py-5 hover:bg-neutral-50 ltr:pl-4 rtl:pr-4 sm:ltr:pl-0 sm:rtl:pr-0">
         <div className="group flex w-full items-center justify-between hover:bg-neutral-50 sm:px-6">
-          <Link
-            href={"/availability/" + schedule.id}
+          <div
+            // href={"/availability/" + schedule.id}
             className="flex-grow truncate text-sm"
-            title={schedule.name}>
+            title={schedule.name || "Sie sind momentan nicht verfügbar"}>
             <div className="space-x-2 rtl:space-x-reverse" style={{ display: "none" }}>
               <span className="truncate font-medium text-gray-900">{schedule.name}</span>
               {schedule.isDefault && (
@@ -68,9 +67,19 @@ export function ScheduleListItem({
                   &nbsp;{schedule.timeZone ?? displayOptions?.timeZone}
                 </p>
               )}
+              {schedule.availability.length === 0 && "Sie sind momentan nicht verfügbar"}
             </p>
-          </Link>
+          </div>
         </div>
+        <Button
+          href={"/availability/" + schedule.id}
+          className="mx-5"
+          type="button"
+          variant="icon"
+          color="secondary"
+          style={{ minWidth: "200px" }}>
+          Verfügbarkeit einstellen
+        </Button>
         <Dropdown>
           <DropdownMenuTrigger asChild>
             <Button
