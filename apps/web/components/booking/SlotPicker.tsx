@@ -52,6 +52,7 @@ const useSlots = ({
       endTime: endTime?.toISOString() || "",
       timeZone,
       duration,
+      rescheduleUid: useRouterQuery("rescheduleUid")?.rescheduleUid || "",
     },
     {
       enabled: !!startTime && !!endTime && enabled,

@@ -17,6 +17,7 @@ async function getBooking(prisma: PrismaClient, uid: string) {
           name: true,
         },
       },
+      userId: true,
     },
   });
 

@@ -11,10 +11,13 @@ import isTimeOutOfBounds from "@calcom/lib/isOutOfBounds";
 import logger from "@calcom/lib/logger";
 import { performance } from "@calcom/lib/server/perfObserver";
 import getTimeSlots from "@calcom/lib/slots";
-import type prisma from "@calcom/prisma";
+import prisma from "@calcom/prisma";
 import { availabilityUserSelect } from "@calcom/prisma";
 import { EventTypeMetaDataSchema } from "@calcom/prisma/zod-utils";
 import type { EventBusyDate } from "@calcom/types/Calendar";
+
+import type { GetBookingType } from "@lib/getBooking";
+import getBooking from "@lib/getBooking";
 
 import { TRPCError } from "@trpc/server";
 
@@ -40,6 +43,7 @@ const getScheduleSchema = z
       .string()
       .optional()
       .transform((val) => val && parseInt(val)),
+    rescheduleUid: z.string().optional(),
   })
   .refine(
     (data) => !!data.eventTypeId || !!data.usernameList,
@@ -245,6 +249,14 @@ export async function getSchedule(input: z.infer<typeof getScheduleSchema>, ctx:
   if (eventType.schedulingType && !!eventType.hosts?.length) {
     users = eventType.hosts.map(({ isFixed, user }) => ({ isFixed, ...user }));
   }
+
+  // Fix an issue when the consultant is already assigned to first consultant OB-4882,OB-4880
+  let booking: GetBookingType | null = null;
+  if (input.rescheduleUid) {
+    booking = await getBooking(prisma, input.rescheduleUid);
+    users = booking?.userId ? users.filter((user) => user.id === booking!.userId) : users;
+  }
+
   /* We get all users working hours and busy slots */
   const userAvailability = await Promise.all(
     users.map(async (currentUser) => {
