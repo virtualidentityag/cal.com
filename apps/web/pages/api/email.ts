@@ -53,6 +53,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         warnings: ["In order to use Google Meet you must set your destination calendar to a Google Calendar"],
       },
     ],
+    locations: [],
   };
 
   req.statusCode = 200;

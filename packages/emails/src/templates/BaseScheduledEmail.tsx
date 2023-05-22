@@ -17,7 +17,7 @@ const Spacer = () => <p style={{ height: 12 }} />;
 
 export const BaseScheduledEmail = (
   props: {
-    calEvent: CalendarEvent & { locations: Array<{ type: string }> };
+    calEvent: CalendarEvent;
     attendee: Person;
     timeZone: string;
     includeAppsStatus?: boolean;
