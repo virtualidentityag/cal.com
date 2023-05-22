@@ -6,5 +6,9 @@ export const AttendeeRescheduledEmail = (props: React.ComponentProps<typeof Atte
     headerType="calendarCircle"
     subject="event_type_has_been_rescheduled_on_time_date"
     {...props}
+    calEvent={{
+      ...props.calEvent,
+      additionalNotes: props.calEvent.cancellationReason || props.calEvent.additionalNotes || "",
+    }}
   />
 );

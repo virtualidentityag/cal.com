@@ -163,6 +163,9 @@ export interface CalendarEvent {
   appsStatus?: AppsStatus[];
   seatsShowAttendees?: boolean | null;
   seatsPerTimeSlot?: number | null;
+  locations?:
+    | Array<{ type: string; address?: string; link?: string; hostPhoneNumber?: string }>
+    | Prisma.JsonValue;
 }
 
 export interface EntryPoint {

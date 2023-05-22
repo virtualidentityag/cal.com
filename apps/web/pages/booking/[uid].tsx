@@ -348,6 +348,27 @@ export default function Success(props: SuccessProps) {
     bookingInfo.status
   );
 
+  const getMainLocation = () => {
+    const locations = props.eventType.locations as Array<{
+      type: string;
+      address?: string;
+      link?: string;
+      hostPhoneNumber?: string;
+    }>;
+    const result = locations.reduce((current, location) => {
+      if (location.address === locationToDisplay) {
+        return "inPerson";
+      } else if (location.link === locationToDisplay) {
+        return "chat";
+      } else if (location.hostPhoneNumber === locationToDisplay) {
+        return "phoneNumber";
+      }
+      return current;
+    }, "");
+
+    return result ? <p>{t(result)}</p> : null;
+  };
+
   const hasSMSAttendeeAction =
     eventType.workflows.find((workflowEventType) =>
       workflowEventType.workflow.steps.find((step) => step.action === WorkflowActions.SMS_ATTENDEE)
@@ -364,7 +385,7 @@ export default function Success(props: SuccessProps) {
           endTime={bookingInfo.endTime}
           organizer={bookingInfo.user}
           attendees={bookingInfo.attendees}
-          location={locationToDisplay}
+          location={locationToDisplay[locationToDisplay.length - 1]}
           description={bookingInfo.description}
           status={status}
         />
@@ -519,6 +540,7 @@ export default function Success(props: SuccessProps) {
                       <>
                         <div className="mt-3 font-medium">{t("where")}</div>
                         <div className="col-span-2 mt-3">
+                          {getMainLocation()}
                           {locationToDisplay.startsWith("http")
                             ? // <a
                               //   href={locationToDisplay}

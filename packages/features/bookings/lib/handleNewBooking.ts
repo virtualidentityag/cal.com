@@ -1156,8 +1156,12 @@ async function handler(req: NextApiRequest & { userId?: number | undefined }) {
   }
 
   if (!isConfirmedByDefault && noEmail !== true) {
-    await sendOrganizerRequestEmail({ ...evt, additionalNotes });
-    await sendAttendeeRequestEmail({ ...evt, additionalNotes }, attendeesList[0]);
+    console.log("######################## ", eventType.locations, additionalNotes);
+    await sendOrganizerRequestEmail({ ...evt, locations: eventType.locations, additionalNotes });
+    await sendAttendeeRequestEmail(
+      { ...evt, locations: eventType.locations, additionalNotes },
+      attendeesList[0]
+    );
   }
 
   if (

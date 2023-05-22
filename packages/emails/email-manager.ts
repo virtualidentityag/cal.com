@@ -40,19 +40,29 @@ const sendEmail = (prepare: () => BaseEmail) => {
 };
 
 export const sendScheduledEmails = async (calEvent: CalendarEvent) => {
+  const evt = await prisma?.eventType.findFirst({ where: { id: calEvent.eventTypeId! } });
   const emailsToSend: Promise<unknown>[] = [];
 
-  emailsToSend.push(sendEmail(() => new OrganizerScheduledEmail({ calEvent })));
+  emailsToSend.push(
+    sendEmail(() => new OrganizerScheduledEmail({ calEvent: { ...calEvent, locations: evt?.locations } }))
+  );
 
   if (calEvent.team) {
     for (const teamMember of calEvent.team.members) {
-      emailsToSend.push(sendEmail(() => new OrganizerScheduledEmail({ calEvent, teamMember })));
+      emailsToSend.push(
+        sendEmail(
+          () =>
+            new OrganizerScheduledEmail({ calEvent: { ...calEvent, locations: evt?.locations }, teamMember })
+        )
+      );
     }
   }
 
   emailsToSend.push(
     ...calEvent.attendees.map((attendee) => {
-      return sendEmail(() => new AttendeeScheduledEmail(calEvent, attendee));
+      return sendEmail(
+        () => new AttendeeScheduledEmail({ ...calEvent, locations: evt?.locations }, attendee)
+      );
     })
   );
 
@@ -60,20 +70,34 @@ export const sendScheduledEmails = async (calEvent: CalendarEvent) => {
 };
 
 export const sendRescheduledEmails = async (calEvent: CalendarEvent) => {
+  const evt = await prisma?.eventType.findFirst({ where: { id: calEvent.eventTypeId! } });
+
   const emailsToSend: Promise<unknown>[] = [];
 
-  emailsToSend.push(sendEmail(() => new OrganizerRescheduledEmail({ calEvent })));
+  emailsToSend.push(
+    sendEmail(() => new OrganizerRescheduledEmail({ calEvent: { ...calEvent, locations: evt?.locations } }))
+  );
 
   if (calEvent.team) {
     for (const teamMember of calEvent.team.members) {
-      emailsToSend.push(sendEmail(() => new OrganizerRescheduledEmail({ calEvent, teamMember })));
+      emailsToSend.push(
+        sendEmail(
+          () =>
+            new OrganizerRescheduledEmail({
+              calEvent: { ...calEvent, locations: evt?.locations },
+              teamMember,
+            })
+        )
+      );
     }
   }
 
   // @TODO: we should obtain who is rescheduling the event and send them a different email
   emailsToSend.push(
     ...calEvent.attendees.map((attendee) => {
-      return sendEmail(() => new AttendeeRescheduledEmail(calEvent, attendee));
+      return sendEmail(
+        () => new AttendeeRescheduledEmail({ ...calEvent, locations: evt?.locations }, attendee)
+      );
     })
   );
 
@@ -102,13 +126,22 @@ export const sendScheduledSeatsEmails = async (
 };
 
 export const sendOrganizerRequestEmail = async (calEvent: CalendarEvent) => {
+  const evt = await prisma?.eventType.findFirst({ where: { id: calEvent.eventTypeId! } });
+
   const emailsToSend: Promise<unknown>[] = [];
 
-  emailsToSend.push(sendEmail(() => new OrganizerRequestEmail({ calEvent })));
+  emailsToSend.push(
+    sendEmail(() => new OrganizerRequestEmail({ calEvent: { ...calEvent, locations: evt?.locations } }))
+  );
 
   if (calEvent.team?.members) {
     for (const teamMember of calEvent.team.members) {
-      emailsToSend.push(sendEmail(() => new OrganizerRequestEmail({ calEvent, teamMember })));
+      emailsToSend.push(
+        sendEmail(
+          () =>
+            new OrganizerRequestEmail({ calEvent: { ...calEvent, locations: evt?.locations }, teamMember })
+        )
+      );
     }
   }
 
@@ -116,7 +149,8 @@ export const sendOrganizerRequestEmail = async (calEvent: CalendarEvent) => {
 };
 
 export const sendAttendeeRequestEmail = async (calEvent: CalendarEvent, attendee: Person) => {
-  await sendEmail(() => new AttendeeRequestEmail(calEvent, attendee));
+  const evt = await prisma?.eventType.findFirst({ where: { id: calEvent.eventTypeId! } });
+  await sendEmail(() => new AttendeeRequestEmail({ ...calEvent, locations: evt?.locations }, attendee));
 };
 
 export const sendDeclinedEmails = async (calEvent: CalendarEvent) => {
@@ -132,19 +166,29 @@ export const sendDeclinedEmails = async (calEvent: CalendarEvent) => {
 };
 
 export const sendCancelledEmails = async (calEvent: CalendarEvent) => {
+  const evt = await prisma?.eventType.findFirst({ where: { id: calEvent.eventTypeId! } });
   const emailsToSend: Promise<unknown>[] = [];
 
-  emailsToSend.push(sendEmail(() => new OrganizerCancelledEmail({ calEvent })));
+  emailsToSend.push(
+    sendEmail(() => new OrganizerCancelledEmail({ calEvent: { ...calEvent, locations: evt?.locations } }))
+  );
 
   if (calEvent.team?.members) {
     for (const teamMember of calEvent.team.members) {
-      emailsToSend.push(sendEmail(() => new OrganizerCancelledEmail({ calEvent, teamMember })));
+      emailsToSend.push(
+        sendEmail(
+          () =>
+            new OrganizerCancelledEmail({ calEvent: { ...calEvent, locations: evt?.locations }, teamMember })
+        )
+      );
     }
   }
 
   emailsToSend.push(
     ...calEvent.attendees.map((attendee) => {
-      return sendEmail(() => new AttendeeCancelledEmail(calEvent, attendee));
+      return sendEmail(
+        () => new AttendeeCancelledEmail({ ...calEvent, locations: evt?.locations }, attendee)
+      );
     })
   );
 
@@ -199,11 +243,20 @@ export const sendRequestRescheduleEmail = async (
   calEvent: CalendarEvent,
   metadata: { rescheduleLink: string }
 ) => {
+  const evt = await prisma?.eventType.findFirst({ where: { id: calEvent.eventTypeId! } });
   const emailsToSend: Promise<unknown>[] = [];
 
-  emailsToSend.push(sendEmail(() => new OrganizerRequestedToRescheduleEmail(calEvent, metadata)));
+  emailsToSend.push(
+    sendEmail(
+      () => new OrganizerRequestedToRescheduleEmail({ ...calEvent, locations: evt?.locations }, metadata)
+    )
+  );
 
-  emailsToSend.push(sendEmail(() => new AttendeeWasRequestedToRescheduleEmail(calEvent, metadata)));
+  emailsToSend.push(
+    sendEmail(
+      () => new AttendeeWasRequestedToRescheduleEmail({ ...calEvent, locations: evt?.locations }, metadata)
+    )
+  );
 
   await Promise.all(emailsToSend);
 };

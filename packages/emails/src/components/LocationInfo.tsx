@@ -26,6 +26,33 @@ export function LocationInfo(props: { calEvent: CalendarEvent; t: TFunction }) {
 
   const isPhone = location?.startsWith("+");
 
+  const getMainLocation = () => {
+    const locations = props.calEvent.locations as Array<{
+      type: string;
+      address: string;
+      link: string;
+      hostPhoneNumber: string;
+    }>;
+
+    const result = locations?.reduce((current, location) => {
+      if (location.address === providerName) {
+        return "inPerson";
+      } else if (location.link === providerName) {
+        return "chat";
+      } else if (location.hostPhoneNumber === providerName) {
+        return "phoneNumber";
+      }
+      return current;
+    }, "");
+
+    return result ? (
+      <>
+        {t(result) as string}
+        <br />
+      </>
+    ) : null;
+  };
+
   // Because of location being a value here, we can determine the app that generated the location only for Dynamic Link based apps where the value is integrations:*
   // For static link based location apps, the value is that URL itself. So, it is not straightforward to determine the app that generated the location.
   // If we know the App we can always provide the name of the app like we do it for Google Hangout/Google Meet
@@ -35,7 +62,12 @@ export function LocationInfo(props: { calEvent: CalendarEvent; t: TFunction }) {
       <Info
         label={t("where")}
         withSpacer
-        description={providerName || "Link"}
+        description={
+          <>
+            {getMainLocation()}
+            {providerName || "Link"}
+          </>
+        }
         // extraInfo={
         //   meetingUrl && (
         //     <div style={{ color: "#494949", fontWeight: 400, lineHeight: "24px" }}>
@@ -70,7 +102,12 @@ export function LocationInfo(props: { calEvent: CalendarEvent; t: TFunction }) {
     <Info
       label={t("where")}
       withSpacer
-      description={providerName || location}
+      description={
+        <>
+          {getMainLocation()}
+          {providerName || location}
+        </>
+      }
       extraInfo={
         (providerName === "Zoom" || providerName === "Google") && props.calEvent.requiresConfirmation ? (
           <p style={{ color: "#494949", fontWeight: 400, lineHeight: "24px" }}>
