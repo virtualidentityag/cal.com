@@ -1156,7 +1156,6 @@ async function handler(req: NextApiRequest & { userId?: number | undefined }) {
   }
 
   if (!isConfirmedByDefault && noEmail !== true) {
-    console.log("######################## ", eventType.locations, additionalNotes);
     await sendOrganizerRequestEmail({ ...evt, locations: eventType.locations, additionalNotes });
     await sendAttendeeRequestEmail(
       { ...evt, locations: eventType.locations, additionalNotes },
