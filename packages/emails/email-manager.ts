@@ -1,6 +1,7 @@
 import type { TFunction } from "next-i18next";
 
 import type BaseEmail from "@calcom/emails/templates/_base-email";
+import prisma from "@calcom/prisma";
 import type { CalendarEvent, Person } from "@calcom/types/Calendar";
 
 import AttendeeAwaitingPaymentEmail from "./templates/attendee-awaiting-payment-email";
