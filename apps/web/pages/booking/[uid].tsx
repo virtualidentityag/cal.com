@@ -361,7 +361,7 @@ export default function Success(props: SuccessProps) {
       } else if (location.link === locationToDisplay) {
         return "chat";
       } else if (location.hostPhoneNumber === locationToDisplay) {
-        return "phoneNumber";
+        return "audioCall";
       }
       return current;
     }, "");

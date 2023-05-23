@@ -481,6 +481,8 @@
   "inPerson": "Persönlich (Organisator-Adresse)",
   "link_meeting": "Termin verknüpfen",
   "phone_call": "Telefonat",
+  "audioCall": "Telefon-Beratung",
+  "chat": "Chat",
   "your_number": "Ihre Telefonnummer",
   "phone_number": "Telefonnummer",
   "attendee_phone_number": "Telefonnummer Teilnehmer*in",
