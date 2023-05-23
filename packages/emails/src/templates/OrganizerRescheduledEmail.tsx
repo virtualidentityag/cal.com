@@ -6,5 +6,9 @@ export const OrganizerRescheduledEmail = (props: React.ComponentProps<typeof Org
     headerType="calendarCircle"
     subject="event_type_has_been_rescheduled_on_time_date"
     {...props}
+    calEvent={{
+      ...props.calEvent,
+      rescheduled: true,
+    }}
   />
 );

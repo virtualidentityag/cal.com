@@ -9,6 +9,7 @@ export const AttendeeRescheduledEmail = (props: React.ComponentProps<typeof Atte
     calEvent={{
       ...props.calEvent,
       additionalNotes: props.calEvent.cancellationReason || props.calEvent.additionalNotes || "",
+      rescheduled: true,
     }}
   />
 );

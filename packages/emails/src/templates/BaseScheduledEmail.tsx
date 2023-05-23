@@ -17,7 +17,7 @@ const Spacer = () => <p style={{ height: 12 }} />;
 
 export const BaseScheduledEmail = (
   props: {
-    calEvent: CalendarEvent;
+    calEvent: CalendarEvent & { rescheduled?: boolean };
     attendee: Person;
     timeZone: string;
     includeAppsStatus?: boolean;
@@ -61,7 +61,7 @@ export const BaseScheduledEmail = (
       }
       subtitle={props.subtitle || <>{t("emailed_you_and_any_other_attendees")}</>}>
       <Info
-        label={t("cancellation_reason")}
+        label={t(props.calEvent?.rescheduled ? "reschedule_optional" : "cancellation_reason")}
         description={
           props.calEvent.cancellationReason && props.calEvent.cancellationReason.replace("$RCH$", "")
         } // Removing flag to distinguish reschedule from cancellation
