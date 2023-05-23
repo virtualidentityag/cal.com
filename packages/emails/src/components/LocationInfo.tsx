@@ -27,7 +27,15 @@ export function LocationInfo(props: { calEvent: CalendarEvent; t: TFunction }) {
   const isPhone = location?.startsWith("+");
 
   const getMainLocation = () => {
-    const location = getLocation(props.calEvent.locations, providerName || props.calEvent.location);
+    const location = getLocation(
+      props.calEvent.locations as Array<{
+        type: string;
+        address: string;
+        link: string;
+        hostPhoneNumber: string;
+      }>,
+      providerName || props.calEvent.location
+    );
     return location ? (
       <>
         {t(location) as string}
@@ -102,7 +110,15 @@ export function LocationInfo(props: { calEvent: CalendarEvent; t: TFunction }) {
   );
 }
 
-const getLocation = (locations, providerName) => {
+const getLocation = (
+  locations: Array<{
+    type: string;
+    address: string;
+    link: string;
+    hostPhoneNumber: string;
+  }>,
+  providerName: string
+) => {
   for (const location of locations) {
     if (location.hostPhoneNumber === providerName) {
       return "audioCall";
