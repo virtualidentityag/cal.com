@@ -14,7 +14,6 @@ export function getLocaleFromHeaders(req: IncomingMessage): string {
 export const getOrSetUserLocaleFromHeaders = async (req: IncomingMessage): Promise<string> => {
   const prisma = (await import("@calcom/prisma")).default;
   const session = await getSession({ req });
-  const preferredLocale = getLocaleFromHeaders(req);
 
   if (session?.user?.id) {
     const user = await prisma.user.findUnique({
@@ -27,7 +26,7 @@ export const getOrSetUserLocaleFromHeaders = async (req: IncomingMessage): Promi
     });
 
     if (user?.locale) {
-      return user.locale;
+      return "de"; // user.locale;
     }
 
     await prisma.user.update({
@@ -35,7 +34,7 @@ export const getOrSetUserLocaleFromHeaders = async (req: IncomingMessage): Promi
         id: session.user.id,
       },
       data: {
-        locale: preferredLocale,
+        locale: "de", // preferredLocale,
       },
     });
   }

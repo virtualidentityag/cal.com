@@ -1,4 +1,5 @@
-import { Prisma, Booking } from "@prisma/client";
+import type { Booking } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import short from "short-uuid";
 import { v5 as uuidv5 } from "uuid";
 
@@ -165,10 +166,10 @@ export class CalendarEventBuilder implements ICalendarEventBuilder {
         name: user.name || "",
         timeZone: user.timeZone,
         language: {
-          translate: await getTranslation(user.locale ?? "en", "common"),
-          locale: user.locale ?? "en",
+          translate: await getTranslation(user.locale ?? "de", "common"),
+          locale: "de", // user.locale ?? "en",
         },
-        locale: user.locale,
+        locale: "de", // user.locale,
       } as PersonAttendeeCommonFields;
     });
     return await Promise.all(teamMemberPromises);
