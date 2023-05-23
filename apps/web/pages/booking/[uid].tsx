@@ -215,7 +215,7 @@ export default function Success(props: SuccessProps) {
   const attendeeName =
     typeof props?.bookingInfo?.attendees?.[0]?.name === "string"
       ? props?.bookingInfo?.attendees?.[0]?.name
-      : "Nameless";
+      : (router.query.attendeeName as string) || "Nameless";
 
   const [is24h, setIs24h] = useState(isBrowserLocale24h());
   const { data: session } = useSession();
@@ -232,6 +232,7 @@ export default function Success(props: SuccessProps) {
   function setIsCancellationMode(value: boolean) {
     if (value) router.query.cancel = "true";
     else delete router.query.cancel;
+    router.query.attendeeName = attendeeName;
     router.replace({
       pathname: router.pathname,
       query: { ...router.query },
