@@ -34,7 +34,7 @@ export function LocationInfo(props: { calEvent: CalendarEvent; t: TFunction }) {
         link: string;
         hostPhoneNumber: string;
       }>,
-      providerName || props.calEvent.location
+      (providerName || props.calEvent.location) as string
     );
     return location ? (
       <>
