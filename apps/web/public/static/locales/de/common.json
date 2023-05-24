@@ -1621,5 +1621,16 @@
   "select_a_router": "Router auswählen",
   "add_a_new_route": "Neue Route hinzufügen",
   "no_responses_yet": "Noch keine Antworten",
-  "this_will_be_the_placeholder": "Dies wird der Platzhalter sein"
+  "this_will_be_the_placeholder": "Dies wird der Platzhalter sein",
+  "greeting": "Lieber(r) Berater/Ratsuchende,",
+  "meeting_scheduled:" : "{{userName}} hat Ihnen einen neuen Termin eingestellt.",
+  "meeting_cancelled" : "{{userName}} hat folgenden Termin abgesagt.",
+  "meeting_postponed" : "{{userName}} hat folgenden Termin verschoben.",
+  "end_greeting": "Liebe Grüße",
+  "end_greeting_subtitle": "Ihr Team von Digisucht",
+  "to_login": "Zum Login",
+  "imprint": "Impressum",
+  "privacy" : "Datenschutz",
+  "tenant_name": "DigiSucht",
+  "tenant_claim": "suchtberatung.digital"
 }
