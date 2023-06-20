@@ -189,6 +189,7 @@ export default function Success(props: SuccessProps) {
     formerTime,
     email,
   } = querySchema.parse(router.query);
+  const isCancelRoute = !!router.asPath.match(/^\/cancel/i);
 
   if ((isCancellationMode || changes) && typeof window !== "undefined") {
     window.scrollTo(0, document.body.scrollHeight);
@@ -321,6 +322,9 @@ export default function Success(props: SuccessProps) {
   }
 
   function getTitle(): string {
+    if (isCancelRoute) {
+      return t("cancel_page_subtitle");
+    }
     const titleSuffix = props.recurringBookings ? "_recurring" : "";
     if (isCancelled) {
       return "";
@@ -456,6 +460,8 @@ export default function Success(props: SuccessProps) {
                         : t("submitted")
                       : isCancelled
                       ? t("event_cancelled")
+                      : isCancelRoute
+                      ? t("cancel_page_title")
                       : reschedule
                       ? t("meeting_is_rescheduled")
                       : props.recurringBookings

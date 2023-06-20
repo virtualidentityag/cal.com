@@ -1633,5 +1633,7 @@
   "privacy" : "Datenschutz",
   "tenant_name": "DigiSucht",
   "tenant_claim": "suchtberatung.digital",
-  "meeting_is_rescheduled": "Sie haben den Termin erfolgreich verschoben"
+  "meeting_is_rescheduled": "Sie haben den Termin erfolgreich verschoben",
+  "cancel_page_title": "Möchten Sie diesen Termin wirklich absagen?",
+  "cancel_page_subtitle": "Wenn Sie den Termin nicht absagen möchten, schließen Sie einfach dieses Browser-Tab."
 }
