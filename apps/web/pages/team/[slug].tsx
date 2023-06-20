@@ -6,15 +6,13 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import { useIsEmbed } from "@calcom/embed-core/embed-iframe";
-import EventTypeDescription from "@calcom/features/eventtypes/components/EventTypeDescription";
 import { CAL_URL } from "@calcom/lib/constants";
 import { getPlaceholderAvatar } from "@calcom/lib/getPlaceholderAvatar";
 import { useLocale } from "@calcom/lib/hooks/useLocale";
 import useTheme from "@calcom/lib/hooks/useTheme";
 import { getTeamWithMembers } from "@calcom/lib/server/queries/teams";
 import { collectPageParameters, telemetryEventTypes, useTelemetry } from "@calcom/lib/telemetry";
-import { Avatar, Button, HeadSeo, AvatarGroup } from "@calcom/ui";
-import { FiArrowRight } from "@calcom/ui/components/icon";
+import { Avatar, HeadSeo } from "@calcom/ui";
 
 import { useToggleQuery } from "@lib/hooks/useToggleQuery";
 import type { inferSSRProps } from "@lib/types/inferSSRProps";
@@ -62,10 +60,10 @@ function TeamPage({ team }: TeamPageProps) {
               <div className="flex flex-wrap items-center space-x-2 rtl:space-x-reverse">
                 <h2 className="dark:text-darkgray-700 text-sm font-semibold text-gray-700">{type.title}</h2>
               </div>
-              <EventTypeDescription className="text-sm" eventType={type} />
+              {/* <EventTypeDescription className="text-sm" eventType={type} /> */}
             </div>
             <div className="mt-1 self-center">
-              <AvatarGroup
+              {/* <AvatarGroup
                 truncateAfter={4}
                 className="flex flex-shrink-0"
                 size="sm"
@@ -74,7 +72,7 @@ function TeamPage({ team }: TeamPageProps) {
                   title: user.name || "",
                   image: CAL_URL + "/" + user.username + "/avatar.png" || "",
                 }))}
-              />
+              /> */}
             </div>
           </Link>
         </li>
@@ -115,7 +113,7 @@ function TeamPage({ team }: TeamPageProps) {
         {!showMembers.isOn && team.eventTypes.length > 0 && (
           <div className="mx-auto max-w-3xl ">
             <EventTypes />
-
+            {/*
             {!team.hideBookATeamMember && (
               <div>
                 <div className="relative mt-12">
@@ -140,7 +138,7 @@ function TeamPage({ team }: TeamPageProps) {
                   </Button>
                 </aside>
               </div>
-            )}
+            )} */}
           </div>
         )}
       </main>
