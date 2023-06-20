@@ -42,7 +42,7 @@ import type { Prisma } from "@calcom/prisma/client";
 import { bookingMetadataSchema } from "@calcom/prisma/zod-utils";
 import { customInputSchema, EventTypeMetaDataSchema } from "@calcom/prisma/zod-utils";
 import { HeadSeo } from "@calcom/ui";
-import { FiX, FiChevronLeft, FiCheck, FiCalendar } from "@calcom/ui/components/icon";
+import { FiX, FiChevronLeft, FiCheck, FiCalendar, FiHelpCircle } from "@calcom/ui/components/icon";
 
 import { timeZone } from "@lib/clock";
 import type { inferSSRProps } from "@lib/types/inferSSRProps";
@@ -431,10 +431,10 @@ export default function Success(props: SuccessProps) {
                 <div
                   className={classNames(
                     "mx-auto flex items-center justify-center",
-                    !giphyImage && !isCancelled && !needsConfirmation
+                    !giphyImage && !isCancelled && !needsConfirmation && !isCancelRoute
                       ? "h-12 w-12 rounded-full bg-green-100"
                       : "",
-                    !giphyImage && !isCancelled && needsConfirmation
+                    (!giphyImage && !isCancelled && needsConfirmation) || isCancelRoute
                       ? "h-12 w-12 rounded-full bg-gray-100"
                       : "",
                     isCancelled ? "h-12 w-12 rounded-full bg-red-100" : ""
@@ -443,7 +443,8 @@ export default function Success(props: SuccessProps) {
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={giphyImage} alt="Gif from Giphy" />
                   )}
-                  {!giphyImage && !needsConfirmation && !isCancelled && (
+                  {isCancelRoute && <FiHelpCircle className="h-5 w-5 text-red-600" />}
+                  {!giphyImage && !needsConfirmation && !isCancelled && !isCancelRoute && (
                     <FiCheck className="h-5 w-5 text-green-600" />
                   )}
                   {needsConfirmation && !isCancelled && <FiCalendar className="h-5 w-5 text-gray-900" />}
