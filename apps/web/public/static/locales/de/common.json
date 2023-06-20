@@ -489,7 +489,7 @@
   "organizer_phone_number": "Telefonnummer des Organisators",
   "host_phone_number": "Ihre Telefonnummer",
   "enter_phone_number": "Telefonnummer eingeben",
-  "reschedule": "Neuplanen",
+  "reschedule": "Bestätigen",
   "reschedule_this": "Stattdessen verschieben",
   "book_a_team_member": "Teammitglied stattdessen buchen",
   "or": "ODER",
@@ -1006,7 +1006,7 @@
   "dynamically_display_attendee_or_organizer": "Zeigt dynamisch entweder Ihnen den Namen Ihres Teilnehmers bzw. Ihrer Teilnehmerin an oder zeigt Ihrem/Ihrer Teilnehmerin Ihren Namen an",
   "event_location": "Ort des Ereignisses",
   "reschedule_optional": "Grund für die Verschiebung (optional)",
-  "reschedule_placeholder": "Lassen Sie andere wissen, warum Sie den Termin verschieben müssen",
+  "reschedule_placeholder": "Lassen Sie Ihre Beraterin / Ihren Berater wissen, warum Sie den Termin verschieben müssen",
   "event_cancelled": "Dieser Termin ist abgesagt",
   "emailed_information_about_cancelled_event": "Wir haben Ihnen und den anderen Teilnehmern eine E-Mail gesendet, damit alle Bescheid wissen.",
   "this_input_will_shown_booking_this_event": "Diese Eingabe wird bei der Buchung dieses Termins angezeigt",
@@ -1632,5 +1632,6 @@
   "imprint": "Impressum",
   "privacy" : "Datenschutz",
   "tenant_name": "DigiSucht",
-  "tenant_claim": "suchtberatung.digital"
+  "tenant_claim": "suchtberatung.digital",
+  "meeting_is_rescheduled": "Sie haben den Termin erfolgreich verschoben"
 }
