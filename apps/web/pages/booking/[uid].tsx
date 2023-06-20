@@ -443,7 +443,7 @@ export default function Success(props: SuccessProps) {
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={giphyImage} alt="Gif from Giphy" />
                   )}
-                  {isCancelRoute && <FiHelpCircle className="h-5 w-5 text-red-600" />}
+                  {isCancelRoute && <FiHelpCircle className="h-5 w-5" style={{ color: "#FF9F00" }} />}
                   {!giphyImage && !needsConfirmation && !isCancelled && !isCancelRoute && (
                     <FiCheck className="h-5 w-5 text-green-600" />
                   )}
