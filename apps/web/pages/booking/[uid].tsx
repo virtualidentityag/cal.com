@@ -189,7 +189,7 @@ export default function Success(props: SuccessProps) {
     formerTime,
     email,
   } = querySchema.parse(router.query);
-  const isCancelRoute = !!router.asPath.match(/^\/cancel/i);
+  const isCancelRoute = !!router.asPath.match(/^\/cancel/i) || isCancellationMode;
 
   if ((isCancellationMode || changes) && typeof window !== "undefined") {
     window.scrollTo(0, document.body.scrollHeight);
