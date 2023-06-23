@@ -231,10 +231,10 @@ export async function getUserAvailability(
 
   const startGetWorkingHours = performance.now();
 
-  const timeZone = schedule.timeZone || eventType?.timeZone || user.timeZone;
+  const timeZone = schedule?.timeZone || eventType?.timeZone || user.timeZone;
 
   const availability = (
-    schedule.availability || (eventType?.availability.length ? eventType.availability : user.availability)
+    schedule?.availability || (eventType?.availability.length ? eventType.availability : user.availability)
   ).map((a) => ({
     ...a,
     userId: user.id,
