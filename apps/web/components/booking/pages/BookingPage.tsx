@@ -1035,7 +1035,7 @@ const BookingPage = ({
 
                 <div className="flex justify-end space-x-2 rtl:space-x-reverse">
                   <Button color="minimal" type="button" onClick={() => router.back()}>
-                    {t("cancel")}
+                    Abbrechen
                   </Button>
                   <Button
                     type="submit"

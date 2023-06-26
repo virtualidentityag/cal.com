@@ -60,13 +60,13 @@ export default function CancelBooking(props: Props) {
             rows={3}
           />
           <div className="flex flex-col-reverse rtl:space-x-reverse ">
-            <div className="ml-auto flex w-full space-x-4 ">
-              <Button
+            <div className="ml-auto flex space-x-4 ">
+              {/* <Button
                 className="ml-auto"
                 color="secondary"
                 onClick={() => props.setIsCancellationMode(false)}>
                 {t("nevermind")}
-              </Button>
+              </Button> */}
               <Button
                 className="flex justify-center"
                 data-testid="cancel"

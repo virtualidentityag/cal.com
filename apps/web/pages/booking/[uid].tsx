@@ -255,10 +255,13 @@ export default function Success(props: SuccessProps) {
   const needsConfirmation = eventType.requiresConfirmation && reschedule != true;
   const isCancelled = status === "CANCELLED" || status === "REJECTED";
   const telemetry = useTelemetry();
+  const [isInIframe, setIsInIframe] = useState(false);
+
   useEffect(() => {
     if (top !== window) {
       //page_view will be collected automatically by _middleware.ts
       telemetry.event(telemetryEventTypes.embedView, collectPageParameters("/booking"));
+      setIsInIframe(true);
     }
   }, [telemetry]);
 
@@ -323,7 +326,7 @@ export default function Success(props: SuccessProps) {
 
   function getTitle(): string {
     if (isCancelRoute) {
-      return t("cancel_page_subtitle");
+      return t(isInIframe ? "cancel_page_subtitle_iframe" : "cancel_page_subtitle");
     }
     const titleSuffix = props.recurringBookings ? "_recurring" : "";
     if (isCancelled) {
@@ -443,7 +446,9 @@ export default function Success(props: SuccessProps) {
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={giphyImage} alt="Gif from Giphy" />
                   )}
-                  {isCancelRoute && <FiHelpCircle className="h-5 w-5" style={{ color: "#FF9F00" }} />}
+                  {isCancelRoute && !isCancelled && (
+                    <FiHelpCircle className="h-5 w-5" style={{ color: "#FF9F00" }} />
+                  )}
                   {!giphyImage && !needsConfirmation && !isCancelled && !isCancelRoute && (
                     <FiCheck className="h-5 w-5 text-green-600" />
                   )}
