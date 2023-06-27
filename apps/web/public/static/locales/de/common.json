@@ -1006,7 +1006,7 @@
   "dynamically_display_attendee_or_organizer": "Zeigt dynamisch entweder Ihnen den Namen Ihres Teilnehmers bzw. Ihrer Teilnehmerin an oder zeigt Ihrem/Ihrer Teilnehmerin Ihren Namen an",
   "event_location": "Ort des Ereignisses",
   "reschedule_optional": "Grund für die Verschiebung (optional)",
-  "reschedule_placeholder": "Lassen Sie Ihre Beraterin / Ihren Berater wissen, warum Sie den Termin verschieben müssen",
+  "reschedule_placeholder": "Lassen Sie andere wissen, warum Sie den Termin verschieben müssen",
   "event_cancelled": "Dieser Termin ist abgesagt",
   "emailed_information_about_cancelled_event": "Wir haben Ihnen und den anderen Teilnehmern eine E-Mail gesendet, damit alle Bescheid wissen.",
   "this_input_will_shown_booking_this_event": "Diese Eingabe wird bei der Buchung dieses Termins angezeigt",
