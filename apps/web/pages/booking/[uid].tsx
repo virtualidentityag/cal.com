@@ -565,7 +565,8 @@ export default function Success(props: SuccessProps) {
                               //   {providerName || "Link"}
                               //   <FiExternalLink className="inline h-4 w-4 text-gray-700 dark:text-white" />
                               // </a>
-                              providerName || "Link"
+                              providerName ||
+                              (locationToDisplay?.match(/^https?:/) ? locationToDisplay : "Link")
                             : locationToDisplay}
                         </div>
                       </>
