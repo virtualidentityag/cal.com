@@ -1636,5 +1636,6 @@
   "meeting_is_rescheduled": "Sie haben den Termin erfolgreich verschoben",
   "cancel_page_title": "Möchten Sie diesen Termin wirklich absagen?",
   "cancel_page_subtitle": "Wenn Sie den Termin nicht absagen möchten, schließen Sie einfach dieses Browser-Tab.",
-  "cancel_page_subtitle_iframe": "Wir haben die anderen Personen informiert."
+  "cancel_page_subtitle_iframe": "Wenn Sie den Termin nicht absagen möchten, gehen Sie einfach zurück zu „Meine Termine\".",
+  "cancel_page_subtitle_iframe_cancelled": "Wir haben die anderen Personen informiert."
 }

@@ -326,7 +326,7 @@ export default function Success(props: SuccessProps) {
 
   function getTitle(): string {
     if (isCancelRoute) {
-      return t(isInIframe ? "cancel_page_subtitle_iframe" : "cancel_page_subtitle");
+      return t(isInIframe ? isCancelled ? "cancel_page_subtitle_iframe_cancelled" : "cancel_page_subtitle_iframe" : "cancel_page_subtitle");
     }
     const titleSuffix = props.recurringBookings ? "_recurring" : "";
     if (isCancelled) {
