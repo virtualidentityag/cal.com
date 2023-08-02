@@ -934,6 +934,10 @@ const BookingPage = ({
                     className="mb-1 block text-sm font-medium text-gray-700 dark:text-white">
                     {rescheduleUid ? t("reschedule_optional") : t("additional_notes")}
                   </label>
+                  <p
+                    className="mb-2 block text-sm font-medium text-gray-700 dark:text-white">
+                    {t("additional_notes_hint")}
+                  </p>                  
                   {rescheduleUid ? (
                     <textarea
                       {...bookingForm.register("rescheduleReason")}
