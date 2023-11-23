@@ -75,7 +75,9 @@ export default class AttendeeScheduledEmail extends BaseEmail {
       },
       to: `${this.attendee.name} <${this.attendee.email}>`,
       from: `${this.calEvent.organizer.name} <${this.getMailerOptions().from}>`,
-      replyTo: [...this.calEvent.attendees.map(({ email }) => email), this.calEvent.organizer.email],
+      replyTo: process.env.EMAIL_NOREPLY
+        ? this.getMailerOptions().from
+        : [...this.calEvent.attendees.map(({ email }) => email), this.calEvent.organizer.email],
       subject: decodeURIComponent(`${this.calEvent.title}`),
       html: renderEmail("AttendeeScheduledEmail", {
         calEvent: this.calEvent,
