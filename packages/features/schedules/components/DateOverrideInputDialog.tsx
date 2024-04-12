@@ -110,21 +110,27 @@ const DateOverrideForm = ({
       handleSubmit={(values) => {
         if (!date) return;
 
-        console.log('DateOverrideForm onChange', {
+        console.log("DateOverrideForm onChange", {
           values,
           date,
-          dayjsWithoutUtc:  dayjs().date(date).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
-          dayjsWithoutUtc2: dayjs().date(dayjs(date).date()).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
-          dayjsWithUtc:  dayjs.utc().date(date).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
-          dayjsWithUtc2: dayjs.utc().date(dayjs(date).date()).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
-          dateWithoutUtc: date.hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
-          dateWithUtc: date.utc().hour(item.start.getHours()).minute(item.start.getMinutes()).toDate(),
-        })
+        });
 
         onChange(
           (datesUnavailable ? [ALL_DAY_RANGE] : values.range).map((item) => ({
-            start: date.utc().hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
-            end: date.utc().hour(item.end.getUTCHours()).minute(item.end.getUTCMinutes()).toDate()
+            start: dayjs
+              .utc()
+              .date(dayjs(date).date())
+              .hour(item.start.getUTCHours())
+              .minute(item.start.getUTCMinutes())
+              .toDate(),
+            end: dayjs
+              .utc()
+              .date(dayjs(date).date())
+              .hour(item.end.getUTCHours())
+              .minute(item.end.getUTCMinutes())
+              .toDate(),
+            // start: date.utc().hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
+            // end: date.utc().hour(item.end.getUTCHours()).minute(item.end.getUTCMinutes()).toDate()
             // start: date.hour(item.start.getHours()).minute(item.start.getMinutes()).toDate(),
             // end: date.hour(item.end.getHours()).minute(item.end.getMinutes()).toDate(),
           }))
