@@ -48,7 +48,7 @@ const DateOverrideList = ({
     );
   };
 
-  console.log('DateOverrideList', {items})
+  console.log('DateOverrideList', {items, i18n})
 
   return (
     <ul className="rounded border border-gray-200" data-testid="date-overrides-list">
