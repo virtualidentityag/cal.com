@@ -109,7 +109,18 @@ const DateOverrideForm = ({
       form={form}
       handleSubmit={(values) => {
         if (!date) return;
-        console.log('DateOverrideForm onChange', {values});
+
+        console.log('DateOverrideForm onChange', {
+          values,
+          date,
+          dayjsWithoutUtc: dayjs().date(date.getDate()).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
+          dayjsWithoutUtc2: dayjs().date(date.getUTCDate()).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
+          dayjsWithUtc: dayjs.utc().date(date.getDate()).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
+          dayjsWithUtc: dayjs.utc().date(date.getUTCDate()).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
+          dateWithoutUtc: date.hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
+          dateWithUtc: date.utc().hour(item.start.getHours()).minute(item.start.getMinutes()).toDate(),
+        })
+
         onChange(
           (datesUnavailable ? [ALL_DAY_RANGE] : values.range).map((item) => ({
             start: date.utc().hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
