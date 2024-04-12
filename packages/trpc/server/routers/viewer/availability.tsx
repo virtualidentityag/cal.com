@@ -116,6 +116,9 @@ export const availabilityRouter = router({
             .tz(timeZone)
             .toDate(),
         };
+
+        console.log('dateOverrides', override, newValue, timeZone);
+
         const dayRangeIndex = acc.findIndex(
           // early return prevents override.date from ever being empty.
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
