@@ -1,7 +1,7 @@
-import { UseFieldArrayRemove } from "react-hook-form";
+import type { UseFieldArrayRemove } from "react-hook-form";
 
 import { useLocale } from "@calcom/lib/hooks/useLocale";
-import { TimeRange, WorkingHours } from "@calcom/types/schedule";
+import type { TimeRange, WorkingHours } from "@calcom/types/schedule";
 import { Button, DialogTrigger, Tooltip } from "@calcom/ui";
 import { FiEdit2, FiTrash2 } from "@calcom/ui/components/icon";
 
@@ -27,16 +27,6 @@ const DateOverrideList = ({
   }
 
   const timeSpan = ({ start, end }: TimeRange) => {
-
-    try {
-      console.log('timeSpan', {
-        start: start.toLocaleString("de-DE", { timeZone: 'Europe/Berlin', hour: '2-digit', minute:'2-digit', hour12: false }),
-        end: end.toLocaleString("de-DE", { timeZone: 'Europe/Berlin', hour: '2-digit', minute:'2-digit', hour12: false })
-      })
-    } catch (error) {
-      console.error('timeSpan', {error})
-    }
-
     return (
       new Intl.DateTimeFormat(i18n.language, { hour: "numeric", minute: "numeric", hour12: false }).format(
         new Date(start.toISOString().slice(0, -1))
@@ -47,8 +37,6 @@ const DateOverrideList = ({
       )
     );
   };
-
-  console.log('DateOverrideList', {items, i18n})
 
   return (
     <ul className="rounded border border-gray-200" data-testid="date-overrides-list">

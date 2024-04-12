@@ -72,7 +72,7 @@ const DateOverride = ({ workingHours }: { workingHours: WorkingHours[] }) => {
         <DateOverrideInputDialog
           workingHours={workingHours}
           excludedDates={fields.map((field) => yyyymmdd(field.ranges[0].start))}
-          onChange={(ranges) => {console.log('DateOverrideInputDialog append', {ranges});append({ ranges })}}
+          onChange={(ranges) => append({ ranges })}
           Trigger={
             <Button color="secondary" StartIcon={FiPlus} data-testid="add-override">
               {t("add_override")}
