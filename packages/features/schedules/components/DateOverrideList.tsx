@@ -27,6 +27,16 @@ const DateOverrideList = ({
   }
 
   const timeSpan = ({ start, end }: TimeRange) => {
+
+    try {
+      console.log('timeSpan', {
+        start: start.toLocaleString("de-DE", { timeZone: 'Europe/Berlin', hour: '2-digit', minute:'2-digit', hour12: false }),
+        end: end.toLocaleString("de-DE", { timeZone: 'Europe/Berlin', hour: '2-digit', minute:'2-digit', hour12: false })
+      })
+    } catch (error) {
+      console.error('timeSpan', {error})
+    }
+
     return (
       new Intl.DateTimeFormat(i18n.language, { hour: "numeric", minute: "numeric", hour12: true }).format(
         new Date(start.toISOString().slice(0, -1))
@@ -38,13 +48,15 @@ const DateOverrideList = ({
     );
   };
 
+  console.log('DateOverrideList', {items, i18n})
+
   return (
     <ul className="rounded border border-gray-200" data-testid="date-overrides-list">
       {items.map((item, index) => (
         <li key={item.id} className="flex justify-between border-b px-5 py-4 last:border-b-0">
           <div>
             <h3 className="text-sm text-gray-900">
-              {new Intl.DateTimeFormat("en-GB", {
+              {new Intl.DateTimeFormat("de-DE", {
                 weekday: "short",
                 month: "long",
                 day: "numeric",
