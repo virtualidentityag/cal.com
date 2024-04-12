@@ -38,11 +38,11 @@ const DateOverrideList = ({
     }
 
     return (
-      new Intl.DateTimeFormat(i18n.language, { hour: "numeric", minute: "numeric", hour12: true }).format(
+      new Intl.DateTimeFormat(i18n.language, { hour: "numeric", minute: "numeric", hour12: false }).format(
         new Date(start.toISOString().slice(0, -1))
       ) +
       " - " +
-      new Intl.DateTimeFormat(i18n.language, { hour: "numeric", minute: "numeric", hour12: true }).format(
+      new Intl.DateTimeFormat(i18n.language, { hour: "numeric", minute: "numeric", hour12: false }).format(
         new Date(end.toISOString().slice(0, -1))
       )
     );

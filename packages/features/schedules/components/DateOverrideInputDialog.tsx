@@ -109,6 +109,7 @@ const DateOverrideForm = ({
       form={form}
       handleSubmit={(values) => {
         if (!date) return;
+        console.log('DateOverrideForm onChange', {values});
         onChange(
           (datesUnavailable ? [ALL_DAY_RANGE] : values.range).map((item) => ({
             start: date.hour(item.start.getHours()).minute(item.start.getMinutes()).toDate(),
