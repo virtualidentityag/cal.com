@@ -113,10 +113,10 @@ const DateOverrideForm = ({
         console.log('DateOverrideForm onChange', {
           values,
           date,
-          dayjsWithoutUtc: dayjs().date(date.getDate()).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
-          dayjsWithoutUtc2: dayjs().date(date.getUTCDate()).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
-          dayjsWithUtc: dayjs.utc().date(date.getDate()).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
-          dayjsWithUtc: dayjs.utc().date(date.getUTCDate()).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
+          dayjsWithoutUtc:  dayjs().date(date).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
+          dayjsWithoutUtc2: dayjs().date(dayjs(date).date()).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
+          dayjsWithUtc:  dayjs.utc().date(date).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
+          dayjsWithUtc2: dayjs.utc().date(dayjs(date).date()).hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
           dateWithoutUtc: date.hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
           dateWithUtc: date.utc().hour(item.start.getHours()).minute(item.start.getMinutes()).toDate(),
         })
