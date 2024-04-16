@@ -86,6 +86,7 @@ export const availabilityRouter = router({
       });
     }
     const availability = convertScheduleToAvailability(schedule);
+    const timeZone = schedule.timeZone || user.timeZone;
     return {
       name: schedule.name,
       rawSchedule: schedule,
@@ -106,13 +107,16 @@ export const availabilityRouter = router({
             .utc(override.date)
             .hour(override.startTime.getUTCHours())
             .minute(override.startTime.getUTCMinutes())
+            .tz(timeZone)
             .toDate(),
           end: dayjs
             .utc(override.date)
             .hour(override.endTime.getUTCHours())
             .minute(override.endTime.getUTCMinutes())
+            .tz(timeZone)
             .toDate(),
         };
+
         const dayRangeIndex = acc.findIndex(
           // early return prevents override.date from ever being empty.
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -125,7 +129,7 @@ export const availabilityRouter = router({
         acc[dayRangeIndex].ranges.push(newValue);
         return acc;
       }, [] as { ranges: TimeRange[] }[]),
-      timeZone: schedule.timeZone || user.timeZone,
+      timeZone,
       isDefault: !input.scheduleId || user.defaultScheduleId === schedule.id,
     };
   }),
