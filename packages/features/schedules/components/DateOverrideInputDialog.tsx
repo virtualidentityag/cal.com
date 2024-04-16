@@ -111,81 +111,26 @@ const DateOverrideForm = ({
         if (!date) return;
 
         onChange(
-          (datesUnavailable ? [ALL_DAY_RANGE] : values.range).map((item) => {
-            console.log({
-              test1: date.utc().hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
-              test2: date.hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
-              test3: date.hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).utc().toDate(),
-              test4: date.utc().hour(item.start.getHours()).minute(item.start.getMinutes()).toDate(),
-              test5: date.hour(item.start.getHours()).minute(item.start.getMinutes()).toDate(),
-              test6: dayjs
-                .utc()
-                .year(date.year())
-                .month(date.month())
-                .date(date.date())
-                .hour(item.start.getUTCHours())
-                .minute(item.start.getUTCMinutes())
-                .second(0)
-                .toDate(),
-              test7: dayjs
-                .utc()
-                .year(date.year())
-                .month(date.month())
-                .date(date.date())
-                .hour(item.start.getUTCHours())
-                .minute(item.start.getUTCMinutes())
-                .second(0)
-                .toDate(),
-              test8: dayjs
-                .utc()
-                .tz("Europe/Berlin")
-                .year(date.year())
-                .month(date.month())
-                .date(date.date())
-                .hour(item.start.getUTCHours())
-                .minute(item.start.getUTCMinutes())
-                .toDate(),
-              test9: dayjs
-                .utc()
-                .tz("Europe/Berlin")
-                .year(date.utc().year())
-                .month(date.utc().month())
-                .date(date.utc().date())
-                .hour(item.start.getUTCHours())
-                .minute(item.start.getUTCMinutes())
-                .toDate(),
-              test10: dayjs
-                .utc()
-                .year(date.year())
-                .month(date.month())
-                .date(date.date())
-                .hour(item.start.getHours())
-                .minute(item.start.getMinutes())
-                .second(0)
-                .toDate(),
-            });
-
-            return {
-              start: dayjs
-                .utc()
-                .year(date.year())
-                .month(date.month())
-                .date(date.date())
-                .hour(item.start.getUTCHours())
-                .minute(item.start.getUTCMinutes())
-                .second(0)
-                .toDate(),
-              end: dayjs
-                .utc()
-                .year(date.year())
-                .month(date.month())
-                .date(date.date())
-                .hour(item.end.getUTCHours())
-                .minute(item.end.getUTCMinutes())
-                .second(0)
-                .toDate(),
-            };
-          })
+          (datesUnavailable ? [ALL_DAY_RANGE] : values.range).map((item) => ({
+            start: dayjs
+              .utc()
+              .year(date.year())
+              .month(date.month())
+              .date(date.date())
+              .hour(item.start.getUTCHours())
+              .minute(item.start.getUTCMinutes())
+              .second(0)
+              .toDate(),
+            end: dayjs
+              .utc()
+              .year(date.year())
+              .month(date.month())
+              .date(date.date())
+              .hour(item.end.getUTCHours())
+              .minute(item.end.getUTCMinutes())
+              .second(0)
+              .toDate(),
+          }))
         );
         onClose();
       }}
@@ -197,10 +142,7 @@ const DateOverrideForm = ({
           excludedDates={excludedDates}
           weekStart={0}
           selected={date}
-          onChange={(day) => {
-            console.log({ day, dayutc: day.utc(), isLocaleReady, locale: i18n.language });
-            setDate(day);
-          }}
+          onChange={(day) => setDate(day)}
           onMonthChange={(newMonth) => {
             setBrowsingDate(newMonth);
           }}
