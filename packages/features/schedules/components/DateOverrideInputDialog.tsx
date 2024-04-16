@@ -122,33 +122,68 @@ const DateOverrideForm = ({
                 .utc()
                 .year(date.year())
                 .month(date.month())
-                .day(date.day())
+                .date(date.date())
                 .hour(item.start.getUTCHours())
                 .minute(item.start.getUTCMinutes())
+                .second(0)
                 .toDate(),
               test7: dayjs
                 .utc()
-                .tz("Europe/Berlin")
                 .year(date.year())
                 .month(date.month())
-                .day(date.day())
+                .date(date.date())
                 .hour(item.start.getUTCHours())
                 .minute(item.start.getUTCMinutes())
+                .second(0)
                 .toDate(),
               test8: dayjs
                 .utc()
                 .tz("Europe/Berlin")
-                .year(date.utc().year())
-                .month(date.utc().month())
-                .day(date.utc().day())
+                .year(date.year())
+                .month(date.month())
+                .date(date.date())
                 .hour(item.start.getUTCHours())
                 .minute(item.start.getUTCMinutes())
+                .toDate(),
+              test9: dayjs
+                .utc()
+                .tz("Europe/Berlin")
+                .year(date.utc().year())
+                .month(date.utc().month())
+                .date(date.utc().date())
+                .hour(item.start.getUTCHours())
+                .minute(item.start.getUTCMinutes())
+                .toDate(),
+              test10: dayjs
+                .utc()
+                .year(date.year())
+                .month(date.month())
+                .date(date.date())
+                .hour(item.start.getHours())
+                .minute(item.start.getMinutes())
+                .second(0)
                 .toDate(),
             });
 
             return {
-              start: date.hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
-              end: date.hour(item.end.getUTCHours()).minute(item.end.getUTCMinutes()).toDate(),
+              start: dayjs
+                .utc()
+                .year(date.year())
+                .month(date.month())
+                .date(date.date())
+                .hour(item.start.getUTCHours())
+                .minute(item.start.getUTCMinutes())
+                .second(0)
+                .toDate(),
+              end: dayjs
+                .utc()
+                .year(date.year())
+                .month(date.month())
+                .date(date.date())
+                .hour(item.end.getUTCHours())
+                .minute(item.end.getUTCMinutes())
+                .second(0)
+                .toDate(),
             };
           })
         );
