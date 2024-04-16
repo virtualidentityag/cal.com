@@ -111,10 +111,18 @@ const DateOverrideForm = ({
         if (!date) return;
 
         onChange(
-          (datesUnavailable ? [ALL_DAY_RANGE] : values.range).map((item) => ({
-            start: date.utc().hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
-            end: date.utc().hour(item.end.getUTCHours()).minute(item.end.getUTCMinutes()).toDate(),
-          }))
+          (datesUnavailable ? [ALL_DAY_RANGE] : values.range).map((item) => {
+            console.log({
+              test1: date.utc().hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
+              test2: date.hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
+              test3: date.hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).utc().toDate(),
+            });
+
+            return {
+              start: date.hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
+              end: date.hour(item.end.getUTCHours()).minute(item.end.getUTCMinutes()).toDate(),
+            };
+          })
         );
         onClose();
       }}
@@ -126,12 +134,15 @@ const DateOverrideForm = ({
           excludedDates={excludedDates}
           weekStart={0}
           selected={date}
-          onChange={(day) => setDate(day)}
+          onChange={(day) => {
+            console.log({ day, dayutc: day.utc() });
+            setDate(day);
+          }}
           onMonthChange={(newMonth) => {
             setBrowsingDate(newMonth);
           }}
           browsingDate={browsingDate}
-          locale={isLocaleReady ? i18n.language : "en"}
+          locale={isLocaleReady ? i18n.language : "de"}
         />
       </div>
       {date && (
