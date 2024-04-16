@@ -116,6 +116,34 @@ const DateOverrideForm = ({
               test1: date.utc().hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
               test2: date.hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
               test3: date.hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).utc().toDate(),
+              test4: date.utc().hour(item.start.getHours()).minute(item.start.getMinutes()).toDate(),
+              test5: date.hour(item.start.getHours()).minute(item.start.getMinutes()).toDate(),
+              test6: dayjs
+                .utc()
+                .year(date.year())
+                .month(date.month())
+                .day(date.day())
+                .hour(item.start.getUTCHours())
+                .minute(item.start.getUTCMinutes())
+                .toDate(),
+              test7: dayjs
+                .utc()
+                .tz("Europe/Berlin")
+                .year(date.year())
+                .month(date.month())
+                .day(date.day())
+                .hour(item.start.getUTCHours())
+                .minute(item.start.getUTCMinutes())
+                .toDate(),
+              test8: dayjs
+                .utc()
+                .tz("Europe/Berlin")
+                .year(date.utc().year())
+                .month(date.utc().month())
+                .day(date.utc().day())
+                .hour(item.start.getUTCHours())
+                .minute(item.start.getUTCMinutes())
+                .toDate(),
             });
 
             return {
@@ -135,7 +163,7 @@ const DateOverrideForm = ({
           weekStart={0}
           selected={date}
           onChange={(day) => {
-            console.log({ day, dayutc: day.utc() });
+            console.log({ day, dayutc: day.utc(), isLocaleReady, locale: i18n.language });
             setDate(day);
           }}
           onMonthChange={(newMonth) => {
