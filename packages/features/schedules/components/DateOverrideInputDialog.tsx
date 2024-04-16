@@ -111,8 +111,8 @@ const DateOverrideForm = ({
         if (!date) return;
         onChange(
           (datesUnavailable ? [ALL_DAY_RANGE] : values.range).map((item) => ({
-            start: date.hour(item.start.getHours()).minute(item.start.getMinutes()).toDate(),
-            end: date.hour(item.end.getHours()).minute(item.end.getMinutes()).toDate(),
+            start: date.utc().hour(item.start.getUTCHours()).minute(item.start.getUTCMinutes()).toDate(),
+            end: date.utc().hour(item.end.getUTCHours()).minute(item.end.getUTCMinutes()).toDate(),
           }))
         );
         onClose();
