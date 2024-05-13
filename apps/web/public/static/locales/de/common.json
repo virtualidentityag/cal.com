@@ -471,7 +471,7 @@
   "yes": "Ja",
   "no": "Nein",
   "additional_notes": "Zusätzliche Notizen",
-  "additional_notes_hint": "Bitte teilen Sie hier noch keine sensiblen Daten, sondern erst im eigentlichen Beratungstermin oder jederzeit im Chat.",
+  "additional_notes_hint": "Bitte teilen Sie hier keine sensiblen Informationen. Nutzen Sie dafür den Beratungstermin oder jederzeit den Chat.",
   "booking_fail": "Termin konnte nicht gebucht werden.",
   "reschedule_fail": "Termin konnte nicht neu geplant werden.",
   "share_additional_notes": "Bitte teilen Sie Notizen zur Vorbereitung des Termins, falls nötig.",

@@ -693,7 +693,7 @@ const BookingPage = ({
                 <>
                   {rescheduleUid ? (
                     <div className="mb-4">
-                      <span className="block text-sm font-medium text-gray-700 dark:text-white">
+                      <span className="block text-sm font-medium font-bold text-gray-700 dark:text-white">
                         {t("location")}
                       </span>
                       <p className="mt-1 text-sm text-gray-500">
@@ -703,7 +703,7 @@ const BookingPage = ({
                   ) : (
                     locations.length > 1 && (
                       <div className="mb-4">
-                        <span className="block text-sm font-medium text-gray-700 dark:text-white">
+                        <span className="block text-sm font-medium font-bold text-gray-700 dark:text-white">
                           {t("location")}
                         </span>
                         {locations.map((location, i) => {
@@ -908,7 +908,7 @@ const BookingPage = ({
                   <div className="mb-4">
                     <label
                       htmlFor="smsReminderNumber"
-                      className="block text-sm font-medium text-gray-700 dark:text-white">
+                      className="block text-sm font-medium font-bold text-gray-700 dark:text-white">
                       {t("number_sms_notifications")}
                     </label>
                     <div className="mt-1">
@@ -931,13 +931,12 @@ const BookingPage = ({
                 <div className="mb-4">
                   <label
                     htmlFor="notes"
-                    className="mb-1 block text-sm font-medium text-gray-700 dark:text-white">
+                    className="mb-1 block text-sm font-medium font-bold text-gray-700 dark:text-white">
                     {rescheduleUid ? t("reschedule_optional") : t("additional_notes")}
                   </label>
-                  <p
-                    className="mb-2 block text-sm font-medium text-gray-700 dark:text-white">
+                  <p className="mb-2 block text-sm font-medium text-gray-700 dark:text-white">
                     {t("additional_notes_hint")}
-                  </p>                  
+                  </p>
                   {rescheduleUid ? (
                     <textarea
                       {...bookingForm.register("rescheduleReason")}
